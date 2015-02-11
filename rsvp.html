@@ -90,10 +90,10 @@
                     <div class="form-group">
                         <label for="menuSel">Menu:</label>
                         <select class="form-control" id="menuSel">
-                            <option>Chicken</option>
-                            <option>Lamb</option>
-                            <option>Vegetarian</option>
-                            <option>Bacon</option>
+                            <option id="1">Chicken</option>
+                            <option id ="2">Lamb</option>
+                            <option id="3">Vegetarian</option>
+                            <option id="4">Bacon</option>
                         </select>
                     </div>
                 </div>
@@ -119,10 +119,10 @@
                         <div class="form-group">
                             <label for="menuSelPlusOne">Menu:</label>
                             <select class="form-control" id="menuSelPlusOne">
-                                <option>Chicken</option>
-                                <option>Lamb</option>
-                                <option>Vegetarian</option>
-                                <option>Bacon</option>
+                                <option id="1">Chicken</option>
+                                <option id = "2">Lamb</option>
+                                <option id="3">Vegetarian</option>
+                                <option id="4">Bacon</option>
                             </select>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
            var contact = $('#contact').val().trim();
            var address = $('#address').val().trim();
            var attending = attendingStatus;
-           var menu = $('#menuSel').val().trim();
+           var menu = $('#menuSel option:selected').attr('id');
 
 
 
@@ -187,21 +187,23 @@
                 'firstName' : firstName,
                'lastName': lastName,
                'email' : email,
-               'contact' : contact,
+               'phoneNumber' : contact,
                'address' : address,
-               'attending' : attending,
-               'menu' : menu,
-               'plusOneStatus' : plusOneStatus
+               'statusId' : attending?'1':'0',
+               'mealId' : menu,
+//               'plusOneStatus' : plusOneStatus,
+               'notes': '',
+               'association' :'bride'
            };
 
 
 
            if (plusOneStatus) {
                var plusOneName = $('#plusOneName').val().trim();
-               var meal = $('#menuSelPlusOne').val().trim();
+               var meal = $('#menuSelPlusOne option:selected').attr('id');
                var plusOneInfo = {
-                   'plusOneName' : plusOneName,
-                   'plusOneMeal'  : meal
+                   'name' : plusOneName,
+                   'mealChoiceId'  : meal
                }
                obj.plusOneInfo = plusOneInfo;
            }
