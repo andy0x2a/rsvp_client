@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="RSVP">
+    <meta name="keywords" content="wedding matt jen vancouver">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/lib/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="src/css/wedding.css">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Jen and Matt</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class=""><a href="index.html">Home</a></li>
+                <li class="active"><a href="#">RSVP</a></li>
+            </ul>
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+            <div class="jumbotron">
+                <div class="container">
+                    <span style="text-align: center"><h1>RSVP</h1> </span>
+                </div>
+            </div>
+
+            <form name="signup" method="post" action="/#" id="rsvp">
+
+                <div class="col-sm-9 myInput ">
+                    <label for="firstName">First Name:</label>
+                    <input id="firstName" class="Input" type="text" name="firstName" autocorrect="off" autocapitalize="off"
+                           placeholder="First Name"/>
+                </div>
+
+
+
+                <div class="col-sm-9 myInput" >
+                    <label for="lastName">Last Name:</label>
+                    <input id="lastName" class="Input" type="text" name="lastName" autocorrect="off" autocapitalize="off"
+                           placeholder="Last Name"/>
+                </div>
+
+
+                <div class="col-sm-9 myInput">
+                    <label for="contact">Phone #:</label>
+                    <input id="contact" class="Input" type="text" name="contact" autocorrect="off" autocapitalize="off"
+                           placeholder="Phone Number"/>
+                </div>
+
+
+                <div class="col-sm-6 myInput">
+                    <label for="address">Address:</label>
+                    <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"
+                           placeholder="Address"> </textarea>
+                </div>
+
+
+                <div class="col-sm-9 myInput">
+                    <label for="email">Email:</label>
+                    <input id="email" class="Input" type="email" name="email" autocorrect="off" autocapitalize="off"
+                           placeholder="Email"/>
+                </div>
+
+
+
+                <div class="col-sm-9 myInput">
+                    <label for="attendings">Attending:</label>
+                    <div class="btn-group" id="attendings" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" id="yes">Yes</button>
+                        <button type="button" class="btn btn-default" id="no">No</button>
+                    </div>
+
+                </div>
+                <div class="col-sm-4 myInput">
+                    <div class="form-group">
+                        <label for="menuSel">Menu:</label>
+                        <select class="form-control" id="menuSel">
+                            <option>Chicken</option>
+                            <option>Lamb</option>
+                            <option>Vegetarian</option>
+                            <option>Bacon</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-9 myInput">
+                    <label for="plusOne">Plus One:</label>
+                    <div class="btn-group" id="plusOne" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" id="plusYes">Yes</button>
+                        <button type="button" class="btn btn-default" id="plusNo">No</button>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-9 plusOne">
+                    <div class="col-sm-9 myInput">
+                        <label for="plusOneName">Plus One Name:</label>
+                        <input id="plusOneName" class="Input" type="text" name="plusOneName" autocorrect="off" autocapitalize="off"
+                               placeholder="Name"/>
+                    </div>
+
+                    <div class="col-sm-4 myInput">
+                        <div class="form-group">
+                            <label for="menuSelPlusOne">Menu:</label>
+                            <select class="form-control" id="menuSelPlusOne">
+                                <option>Chicken</option>
+                                <option>Lamb</option>
+                                <option>Vegetarian</option>
+                                <option>Bacon</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-9 myInput error">
+                    <h2> Please fill out the entire form</h2>
+                </div>
+
+                <div class="col-sm-9 myInput">
+                    <a href="#" class="button btn btn-default" id="submit">
+                        <span id="button_submit_text">   Submit</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="src/lib/jquery-1.11.1.js"></script>
+<script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
+   <script>
+
+
+       var attendingStatus = undefined;
+       var plusOneStatus = false;
+
+       var showPlusOne = function () {
+        $('.plusOne').show();
+       };
+
+       var hidePlusOne = function() {
+           $('.plusOne').hide();
+       };
+
+       var processForm = function () {
+
+
+           $('.error').hide();
+
+           var firstName = $('#firstName').val().trim();
+           var lastName = $('#lastName').val().trim();
+           var email = $('#email').val().trim();
+           var contact = $('#contact').val().trim();
+           var address = $('#address').val().trim();
+           var attending = attendingStatus;
+           var menu = $('#menuSel').val().trim();
+
+
+
+
+           var isValid = true;
+
+           isValid = firstName && lastName && email && contact && address && attending && menu;
+
+
+
+
+           var obj = {
+                'firstName' : firstName,
+               'lastName': lastName,
+               'email' : email,
+               'contact' : contact,
+               'address' : address,
+               'attending' : attending,
+               'menu' : menu,
+               'plusOneStatus' : plusOneStatus
+           };
+
+
+
+           if (plusOneStatus) {
+               var plusOneName = $('#plusOneName').val().trim();
+               var meal = $('#menuSelPlusOne').val().trim();
+               var plusOneInfo = {
+                   'plusOneName' : plusOneName,
+                   'plusOneMeal'  : meal
+               }
+               obj.plusOneInfo = plusOneInfo;
+           }
+
+
+           if (isValid) {
+               console.log('submitting');
+           } else {
+               $('.error').show();
+           }
+           console.log(JSON.stringify(obj));
+
+
+       };
+
+       $(document).ready(function () {
+
+           $('.error').hide();
+           hidePlusOne();
+
+           $("#yes").on('click', function (e) {
+               e.preventDefault();
+               attendingStatus = true;
+           });
+
+
+
+           $("#no").on('click', function (e) {
+               e.preventDefault();
+               attendingStatus = false;
+           });
+
+
+           $("#plusYes").on('click', function (e) {
+               e.preventDefault();
+               plusOneStatus = true;
+               showPlusOne();
+           });
+
+
+
+           $("#plusNo").on('click', function (e) {
+               e.preventDefault();
+               plusOneStatus = false;
+               hidePlusOne();
+           });
+
+
+
+           $("#submit").on('click', function (e) {
+               e.preventDefault();
+              processForm();
+           });
+           
+       });
+       
+       
+   </script>
+</body>
+</html>
