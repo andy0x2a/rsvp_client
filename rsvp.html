@@ -90,10 +90,6 @@
                     <div class="form-group">
                         <label for="menuSel">Menu:</label>
                         <select class="form-control" id="menuSel">
-                            <option id="1">Chicken</option>
-                            <option id ="2">Lamb</option>
-                            <option id="3">Vegetarian</option>
-                            <option id="4">Bacon</option>
                         </select>
                     </div>
                 </div>
@@ -119,10 +115,6 @@
                         <div class="form-group">
                             <label for="menuSelPlusOne">Menu:</label>
                             <select class="form-control" id="menuSelPlusOne">
-                                <option id="1">Chicken</option>
-                                <option id = "2">Lamb</option>
-                                <option id="3">Vegetarian</option>
-                                <option id="4">Bacon</option>
                             </select>
                         </div>
                     </div>
@@ -148,6 +140,7 @@
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
    <script>
 
+       var serverURL = "http://localhost:8080/";
 
        var attendingStatus = true;
        var plusOneStatus = false;
@@ -209,7 +202,7 @@
            }
 
 
-           var serverURL = "http://localhost:8080/";
+
            var onComplete = function(a,b,c) {
                console.log('success');
            }
@@ -240,6 +233,39 @@
 
            $('.error').hide();
            hidePlusOne();
+
+           var mealOnComplete = function (data){
+               for(var i = 0; i < data.length; i++) {
+                   var obj = data[i];
+
+                   $("#menuSel")
+               .append($("<option></option>")
+                           .attr("value",obj.id)
+                                   .attr("id",obj.id)
+                           .text(obj.name));
+                   $("#menuSelPlusOne")
+                           .append($("<option></option>")
+                                   .attr("value",obj.id)
+                                   .attr("id",obj.id)
+                                   .text(obj.name));
+
+
+               }
+           };
+
+           var mealOnError = function() {
+
+           }
+           $.ajax( {
+               url: serverURL + "meal/",
+               type: "GET",
+               dataType:"json",
+               contentType: 'application/json',
+               success: mealOnComplete,
+               error:mealOnError
+           })
+
+
 
            $("#yes").on('click', function (e) {
                e.preventDefault();
