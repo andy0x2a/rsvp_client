@@ -39,6 +39,9 @@
                 </div>
             </div>
 
+            <div id="thanks" class="jumbotron centred">
+                <span>Your RSVP Has been Received, Thank you.</span>
+            </div>
             <form name="signup" method="post" action="/#" id="rsvp">
 
                 <div class="col-sm-9 myInput ">
@@ -75,7 +78,15 @@
                     <input id="email" class="Input" type="email" name="email" autocorrect="off" autocapitalize="off"
                            placeholder="Email"/>
                 </div>
+                <div class="col-sm-9 myInput">
+                    <label for="association">Guest of:</label>
+                    <div class="btn-group" id="association" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride</button>
+                        <button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>
+                        <button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom</button>
+                    </div>
 
+                </div>
 
 
                 <div class="col-sm-9 myInput">
@@ -132,6 +143,7 @@
                     </a>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
@@ -144,6 +156,7 @@
 
        var attendingStatus = true;
        var plusOneStatus = false;
+       var association = 'none-selected';
 
        var showPlusOne = function () {
         $('.plusOne').show();
@@ -186,7 +199,7 @@
                'mealId' : menu,
 //               'plusOneStatus' : plusOneStatus,
                'notes': '',
-               'association' :'bride'
+               'association' :association
            };
 
 
@@ -205,6 +218,9 @@
 
            var onComplete = function(a,b,c) {
                console.log('success');
+               $("#submit").addClass('disabled');
+               $('#rsvp').hide();
+               $('#thanks').show();
            }
 
            var onError = function(a,b,c) {
@@ -218,7 +234,7 @@
                    data: JSON.stringify(obj),
                    dataType:"json",
                contentType: 'application/json',
-                   complete: onComplete,
+                   success: onComplete,
                    error:onError
                })
            } else {
@@ -232,6 +248,7 @@
        $(document).ready(function () {
 
            $('.error').hide();
+           $("#thanks").hide();
            hidePlusOne();
 
            var mealOnComplete = function (data){
@@ -300,6 +317,26 @@
                $(".btn-plus").removeClass('active');
                $("#plusNo").addClass('active');
                hidePlusOne();
+           });
+
+
+           $("#brideAssoc").on('click', function (e) {
+               e.preventDefault();
+               association = 'bride';
+               $(".btn-assoc").removeClass('active');
+               $("#brideAssoc").addClass('active');
+           });
+           $("#bothAssoc").on('click', function (e) {
+               e.preventDefault();
+               association = 'both';
+               $(".btn-assoc").removeClass('active');
+               $("#bothAssoc").addClass('active');
+           });
+           $("#groomAssoc").on('click', function (e) {
+               e.preventDefault();
+               association = 'groom';
+               $(".btn-assoc").removeClass('active');
+               $("#groomAssoc").addClass('active');
            });
 
 
