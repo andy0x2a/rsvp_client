@@ -170,6 +170,7 @@
 
        var isEdit = false;
        var id;
+       var plusOneId;
 
        var showPlusOne = function () {
         $('.plusOne').show();
@@ -249,7 +250,8 @@
                if (isEdit) {
                    obj.id = id;
                    verb = "PUT";
-                   url = url + "id"
+                   url = url + id;
+                   obj.plusOneInfo.id = plusOneId;
                }
                $.ajax( {
                    url: url,
@@ -408,7 +410,8 @@
                $('#menuSel').val( data.mealId );
 
                if (data.plusOneInfo) {
-                   showPlusOne();
+                   $('#plusYes').click();
+                   plusOneId = data.plusOneInfo.id;
                    $('#menuSelPlusOne').val( data.plusOneInfo.mealChoiceId );
                    $('#plusOneName').val(data.plusOneInfo.name);
                }
