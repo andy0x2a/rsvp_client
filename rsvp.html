@@ -42,6 +42,15 @@
             <div id="thanks" class="jumbotron centred">
                 <span>Your RSVP Has been Received, Thank you.</span>
             </div>
+            <div id="returning" class="jumbotron centred">
+                <span>You have already submitted your RSVP. Do you want to update it?</span>
+
+                <div class="showEditBtn">
+                    <a href="#" class="button btn btn-default" id="showEditBtn">
+                        <span id="reshow"> Edit RSVP</span>
+                    </a>
+                </div>
+            </div>
             <form name="signup" method="post" action="/#" id="rsvp">
 
                 <div class="col-sm-9 myInput ">
@@ -148,7 +157,8 @@
     </div>
 </div>
 
-<script src="src/lib/jquery-1.11.1.js"></script>
+<script src="src/js/vendor/jquery-2.1.3.js"></script>
+<script src="src/js/vendor/jquery.cookie.js"></script>
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
    <script>
 
@@ -157,6 +167,9 @@
        var attendingStatus = true;
        var plusOneStatus = false;
        var association = 'none-selected';
+
+       var isEdit = false;
+       var id;
 
        var showPlusOne = function () {
         $('.plusOne').show();
@@ -184,7 +197,7 @@
 
            var isValid = true;
 
-           isValid = firstName && lastName && email && contact && address && attending && menu;
+           isValid = firstName && lastName && email && contact && address && menu;
 
 
 
@@ -218,8 +231,11 @@
 
            var onComplete = function(a,b,c) {
                console.log('success');
+               $.cookie("com.newmansoft.rsvp.client",a.id);
+               id = a.id;
                $("#submit").addClass('disabled');
                $('#rsvp').hide();
+               $('#returning').hide();
                $('#thanks').show();
            }
 
@@ -228,12 +244,19 @@
            }
            if (isValid) {
                console.log('submitting');
+               var verb = "POST";
+               var url = serverURL + "guest/";
+               if (isEdit) {
+                   obj.id = id;
+                   verb = "PUT";
+                   url = url + "id"
+               }
                $.ajax( {
-                   url: serverURL + "guest/",
-                   type: "POST",
+                   url: url,
+                   type: verb,
                    data: JSON.stringify(obj),
                    dataType:"json",
-               contentType: 'application/json',
+                   contentType: 'application/json',
                    success: onComplete,
                    error:onError
                })
@@ -249,7 +272,19 @@
 
            $('.error').hide();
            $("#thanks").hide();
+           $('#returning').hide();
            hidePlusOne();
+
+           var result = $.cookie("com.newmansoft.rsvp.client");
+            if (result) {
+                console.log('found  ' + result);
+                $("#submit").addClass('disabled');
+                $('#rsvp').hide();
+                $('#returning').show();
+                id = result;
+
+            }
+
 
            var mealOnComplete = function (data){
                for(var i = 0; i < data.length; i++) {
@@ -344,6 +379,66 @@
            $("#submit").on('click', function (e) {
                e.preventDefault();
               processForm();
+           });
+
+
+           var getOnSuccess = function (data) {
+
+
+               console.log('need to fill out variables here');
+
+                $('#firstName').val(data.firstName);
+               $('#lastName').val(data.lastName);
+               $('#email').val(data.email);
+               $('#contact').val(data.phoneNumber);
+               $('#address').val(data.address);
+               if (data.statusId  == 1) {
+                   $("#yes").click();
+               } else {
+                   $("#no").click();
+               }
+               if (data.association ==="bride") {
+                   $('#brideAssoc').click();
+               } else if (data.association === "groom") {
+                   $('#groomAssoc').click();
+               } else {
+                   $('#bothAssoc').click();
+               }
+
+               $('#menuSel').val( data.mealId );
+
+               if (data.plusOneInfo) {
+                   showPlusOne();
+                   $('#menuSelPlusOne').val( data.plusOneInfo.mealChoiceId );
+                   $('#plusOneName').val(data.plusOneInfo.name);
+               }
+
+               $("#submit").removeClass('disabled');
+
+           };
+
+           var getOnError = function (e) {
+
+               alert('something went wrong retrieving the RSVP info');
+           };
+
+           $('#showEditBtn').on('click', function(e) {
+               //show form for edit
+               e.preventDefault();
+               $('#rsvp').show();
+
+               $.ajax( {
+                   url: serverURL + "guest/" + id,
+                   type: "GET",
+                   dataType:"json",
+                   contentType: 'application/json',
+                   success: getOnSuccess,
+                   error:getOnError
+               });
+
+               $("#submit").text('Submit Changes');
+               isEdit = true;
+
            });
            
        });

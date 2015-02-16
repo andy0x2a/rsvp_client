@@ -122,3 +122,7 @@ body {
 .centred {
     text-align: center;
 }
+
+.showEditBtn {
+    margin-top: 25px;
+}
