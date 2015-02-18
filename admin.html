@@ -97,7 +97,14 @@
                 <div class="col-sm-10 adminEditSingle">
 
 
-                    <form name="signup" method="post" action="/#" id="rsvp">
+                    <form name="signupEdit" method="post" action="/#" id="rsvp_edit">
+
+                        <div class="col-sm-9 myInput ">
+                            <label for="id">ID:</label>
+                            <input id="id" class="Input readonly"  readonly type="text" name="id" autocorrect="off" autocapitalize="off"
+                                   placeholder="ID"/>
+                        </div>
+
 
                         <div class="col-sm-9 myInput ">
                             <label for="firstName">First Name:</label>
@@ -121,7 +128,7 @@
                         </div>
 
 
-                        <div class="col-sm-6 myInput">
+                        <div class="col-sm-9 myInput">
                             <label for="address">Address:</label>
                     <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"
                               placeholder="Address"> </textarea>
@@ -152,7 +159,7 @@
                             </div>
 
                         </div>
-                        <div class="col-sm-4 myInput">
+                        <div class="col-sm-9 myInput">
                             <div class="form-group">
                                 <label for="menuSel">Menu:</label>
                                 <select class="form-control" id="menuSel">
@@ -171,13 +178,20 @@
 
 
                         <div class="col-sm-9 plusOne">
+
+                            <div class="col-sm-9 myInput ">
+                                <label for="plusOneId">ID:</label>
+                                <input id="plusOneId" class="Input readonly"  readonly type="text" name="id" autocorrect="off" autocapitalize="off"
+                                       placeholder="ID"/>
+                            </div>
+
                             <div class="col-sm-9 myInput">
                                 <label for="plusOneName">Plus One Name:</label>
                                 <input id="plusOneName" class="Input" type="text" name="plusOneName" autocorrect="off" autocapitalize="off"
                                        placeholder="Name"/>
                             </div>
 
-                            <div class="col-sm-4 myInput">
+                            <div class="col-sm-9 myInput">
                                 <div class="form-group">
                                     <label for="menuSelPlusOne">Menu:</label>
                                     <select class="form-control" id="menuSelPlusOne">
@@ -227,7 +241,8 @@
            allData = data;
            $(".adminConsole").show();
 
-           var body = $('<tbody></tbody>');
+           $("tbody").remove();
+           var body = $('<tbody class="tbdy"></tbody>');
 
            $.each(data, function(i, item) {
 
@@ -266,7 +281,7 @@ console.log(rowStr);
 
            });
 console.log(body);
-           $("#tbl").append(body);
+           $("table").append(body);
            $(".editIcon").on('click', function(event) {
                event.preventDefault();
                var elem=$(event.target);
@@ -275,8 +290,102 @@ console.log(body);
               var id =  $(event.target).parent('a').attr('id').substring(10);
                showDataFor(id);
 
+               $("#submitEdit").on('click',submitEditedGuest);
+
            });
        };
+
+    var submitEditedGuest = function() {
+
+
+
+
+        $('.error').hide();
+        var id = $('#id').val().trim();
+        var firstName = $('#firstName').val().trim();
+        var lastName = $('#lastName').val().trim();
+        var email = $('#email').val().trim();
+        var contact = $('#contact').val().trim();
+        var address = $('#address').val().trim();
+        var attending = attendingStatus;
+        var menu = $('#menuSel option:selected').attr('id');
+
+
+
+        var plusOneStatus = true;
+
+
+        var isValid = true;
+
+        isValid = firstName && lastName && email && contact && address && menu;
+
+
+
+
+        var obj = {
+            'firstName' : firstName,
+            'lastName': lastName,
+            'email' : email,
+            'phoneNumber' : contact,
+            'address' : address,
+            'statusId' : attending?'1':'0',
+            'mealId' : menu,
+//               'plusOneStatus' : plusOneStatus,
+            'notes': '',
+            'association' :association,
+            'id':id
+        };
+
+
+
+        if (plusOneStatus) {
+            var plusOneName = $('#plusOneName').val().trim();
+            var meal = $('#menuSelPlusOne option:selected').attr('id');
+            var plusOneInfo = {
+                'name' : plusOneName,
+                'mealChoiceId'  : meal,
+                'id':   plusOneId
+            }
+            obj.plusOneInfo = plusOneInfo;
+        }
+
+        verb = "PUT";
+
+        var onComplete = function(a,b,c) {
+            console.log('success');
+            $('.adminEditSingle').hide();
+
+        }
+
+        var onError = function(a,b,c) {
+            console.log('failed');
+        }
+        if (isValid) {
+            console.log('submitting');
+            var verb = "POST";
+            var url = serverURL + "admin/guest/" + obj.id;
+            if (isEdit) {
+
+            }
+            $.ajax( {
+                url: url,
+                type: "PUT",
+                data: JSON.stringify(obj),
+                dataType:"json",
+                contentType: 'application/json',
+                success: onComplete,
+                error:onError
+            })
+        } else {
+            $('.error').show();
+        }
+        console.log(JSON.stringify(obj));
+
+
+    }
+
+
+
 
 
        var showDataFor = function(id) {
@@ -294,6 +403,7 @@ console.log(body);
 
                console.log('need to fill out variables here');
 
+               $('#id').val(foundElem.id);
                $('#firstName').val(foundElem.firstName);
                $('#lastName').val(foundElem.lastName);
                $('#email').val(foundElem.email);
@@ -319,6 +429,7 @@ console.log(body);
                    plusOneId = foundElem.plusOneInfo.id;
                    $('#menuSelPlusOne').val( foundElem.plusOneInfo.mealChoiceId );
                    $('#plusOneName').val(foundElem.plusOneInfo.name);
+                   $('#plusOneId').val(foundElem.plusOneInfo.id);
                }
 
 
