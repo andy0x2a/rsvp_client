@@ -40,7 +40,7 @@
             </div>
 
 
-            <div class="col-sm-10 row " >
+            <div class="col-sm-10 row  loginDiv" >
                 <form name="pass" method="post" action="/#" id="pass">
 
                     <div class="col-sm-9 myInput">
@@ -55,6 +55,19 @@
                         </a>
                     </div>
                 </form>
+            </div>
+            <div class="adminDashboard">
+                <div class="col-sm-9 myInput">
+                    <a href="#" class="button btn btn-default" id="getAllRSVPs">
+                        <span >View/Edit RSVPs</span>
+                    </a>
+                </div>
+                <div class="col-sm-9 myInput">
+                    <a href="#" class="button btn btn-default" id="getAllMeals">
+                        <span >View/Edit Meal Choices RSVPs</span>
+                    </a>
+                </div>
+
             </div>
             <div class="col-sm-10 adminConsole">
 
@@ -87,11 +100,7 @@
 
 
                     </div>
-                    <div class="col-sm-9 myInput">
-                        <a href="#" class="button btn btn-default" id="submit">
-                            <span id="button_submit_text">   Submit</span>
-                        </a>
-                    </div>
+
                 </form>
 
                 <div class="col-sm-10 adminEditSingle">
@@ -385,6 +394,7 @@ console.log(body);
     }
 
 
+       //$('#customers').tableExport({type:'excel',escape:'false'});
 
 
 
@@ -462,22 +472,37 @@ console.log(body);
        $(document).ready(function () {
 
            $(".adminConsole").hide();
-
+           $(".adminDashboard").hide();
            $(".adminEditSingle").hide();
-//           $(".editIcon").click(function(event) {
-//               event.preventDefault();
-//               var elem=$(event.target);
-//               console.log(elem);
-//           });
+
+
+           $("#getAllRSVPs").on('click', function() {
+                       console.log(adminPass);
+                       $(".error").addClass('hidden');
+                       getList();
+                   }
+
+           );
            $("#submitPass").on('click', function(e) {
            adminPass = $("#adminPass").val().trim();
-           console.log(adminPass);
+
+               $.ajax( {
+                   url: serverURL + "admin/login/",
+                   type: "GET",
+                   dataType:"json",
+                   contentType: 'application/json',
+                   headers: { 'Authorization': adminPass },
+                   success: function () {
+                       $(".adminDashboard").show();
+                       $(".loginDiv").hide();
+                   },
+                   error: function () {
+                       alert('Invalid Password');
+                   }
+               });
 
 
-               $(".error").addClass('hidden');
 
-
-               getList();
 
            });
            
