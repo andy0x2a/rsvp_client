@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-sm-9 myInput">
                     <a href="#" class="button btn btn-default" id="getAllMeals">
-                        <span>View/Edit Meal Choices RSVPs</span>
+                        <span>View/Edit Meal Choices</span>
                     </a>
                 </div>
 
@@ -281,13 +281,19 @@
 
     var allData;
     var allMeals;
+    var allMealMap;
 
+    var getMealName = function(mealId) {
+        if (!allMealMap || !mealId) {return '';}
+        return allMealMap[mealId];
+
+    }
     var getListOnSuccess = function (data) {
 
         allData = data;
         $(".adminConsole").show();
 
-        $("tbdy").remove();
+        $(".tbdy").remove();
         var body = $('<tbody class="tbdy"></tbody>');
 
         $.each(data, function (i, item) {
@@ -295,10 +301,9 @@
 
             var plusOneInfoName = '';
             var plusOneInfoMeal = '';
-            var p
             if (!!item.plusOneInfo) {
                 plusOneInfoName = item.plusOneInfo.name;
-                plusOneInfoMeal = item.plusOneInfo.mealChoiceId;
+                plusOneInfoMeal = getMealName(item.plusOneInfo.mealChoiceId );
             }
             var rowStr = '<tr>' +
 
@@ -308,7 +313,7 @@
                     '<td>' + item.phoneNumber + '</td>' +
                     '<td>' + item.email + '</td>' +
                     '<td>' + item.statusId + '</td>' +
-                    '<td>' + item.mealId + '</td>' +
+                    '<td>' + getMealName(item.mealId )+ '</td>' +
                     '<td>' + item.address + '</td>' +
                     '<td>' + item.association + '</td>' +
                     '<td>' + item.notes + '</td>' +
@@ -318,15 +323,12 @@
                     '</row>';
 
 
-            console.log(rowStr);
-
-
             var row = $(rowStr);
             body.append(row);
 
 
         });
-        $("table").append(body);
+        $("#tbl").append(body);
         $(".editIcon").on('click', function (event) {
             event.preventDefault();
             var elem = $(event.target);
@@ -487,7 +489,7 @@
 
         allMeals = data;
 
-        $("tbdyMeal").remove();
+        $(".tbdyMeal").remove();
         var body = $('<tbody class="tbdyMeal"></tbody>');
 
         $.each(data, function (i, item) {
@@ -500,11 +502,6 @@
                     '<td>' + item.name + '</td>' +
                     '<td> <a href="#" class="editIconMeal" id="edit_meal_' + item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
                     '</row>';
-
-
-            console.log(rowStr);
-
-
             var row = $(rowStr);
             body.append(row);
 
@@ -558,22 +555,42 @@
 
     }
 
+    var prePopMealList =  function(data) {
 
-    $(document).ready(function () {
+        allMeals = data;
 
+        allMealMap = {};
+        for(var i = 0; i < data.length; i++) {
+            var obj = data[i];
+
+            allMealMap[obj.id] = (obj.name);
+
+        }
+        console.log('check here');
+    };
+
+    var hideAll = function() {
         $(".adminConsole").hide();
-        $(".adminDashboard").hide();
+
         $(".adminEditSingle").hide();
         $('.adminMeal').hide();
 
-
+    }
+    $(document).ready(function () {
+        $(".adminDashboard").hide();
+        hideAll();
         $("#getAllRSVPs").on('click', function () {
+                    hideAll();
                     console.log(adminPass);
                     $(".error").addClass('hidden');
                     getList();
                 }
         );
+
+
+        getListOfMeals(prePopMealList);
         $("#getAllMeals").on('click', function() {
+            hideAll();
             getListOfMeals(getListOfMealsOnSuccess);
         })
         $("#adminPass").keyup(function(e) {
