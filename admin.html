@@ -35,17 +35,18 @@
 
             <div class="jumbotron">
                 <div class="container">
-                    <span style="text-align: center"><h1>Admin</h1> </span>
+                    <span style="text-align: center"><h1></h1> </span>
                 </div>
             </div>
 
 
-            <div class="col-sm-10 row  loginDiv" >
+            <div class="col-sm-10 row  loginDiv">
                 <form name="pass" method="post" action="/#" id="pass">
 
                     <div class="col-sm-9 myInput">
                         <label for="adminPass">Password:</label>
-                        <input id="adminPass" class="Input" type="password" name="adminPass" autocorrect="off" autocapitalize="off"
+                        <input id="adminPass" class="Input" type="password" name="adminPass" autocorrect="off"
+                               autocapitalize="off"
                                placeholder="Password"/>
                         <span class="error hidden">Invalid password </span>
                     </div>
@@ -59,23 +60,42 @@
             <div class="adminDashboard">
                 <div class="col-sm-9 myInput">
                     <a href="#" class="button btn btn-default" id="getAllRSVPs">
-                        <span >View/Edit RSVPs</span>
+                        <span>View/Edit RSVPs</span>
                     </a>
                 </div>
                 <div class="col-sm-9 myInput">
                     <a href="#" class="button btn btn-default" id="getAllMeals">
-                        <span >View/Edit Meal Choices RSVPs</span>
+                        <span>View/Edit Meal Choices RSVPs</span>
                     </a>
                 </div>
 
             </div>
+
+            <div class="col-sm-10 adminMeal">
+
+                <div>
+                    <table id="tblMeal" class="table table-hover">
+
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+
+                        </tr>
+                        </thead>
+
+                    </table>
+
+
+                </div>
+            </div>
+
+
+
             <div class="col-sm-10 adminConsole">
 
-                <form name="admin" method="post" action="/#" id="rsvp">
-
-
                     <div>
-                            <table  id="tbl" class="table table-hover">
+                        <table id="tbl" class="table table-hover">
 
                             <thead>
                             <tr>
@@ -83,7 +103,7 @@
                                 <th>first Name</th>
                                 <th>Last Name</th>
                                 <th>phone Number</th>
-                                <th>Email </th>
+                                <th>Email</th>
                                 <th>Status</th>
                                 <th>Meal</th>
                                 <th>Address</th>
@@ -95,136 +115,152 @@
                             </tr>
                             </thead>
 
-                            </table>
-
+                        </table>
 
 
                     </div>
 
-                </form>
+                <div class="row adminEditSingle">
 
-                <div class="col-sm-10 adminEditSingle">
-
-
-                    <form name="signupEdit" method="post" action="/#" id="rsvp_edit">
-
-                        <div class="col-sm-9 myInput ">
-                            <label for="id">ID:</label>
-                            <input id="id" class="Input readonly"  readonly type="text" name="id" autocorrect="off" autocapitalize="off"
-                                   placeholder="ID"/>
-                        </div>
+                    <div class="col-sm-10">
 
 
-                        <div class="col-sm-9 myInput ">
-                            <label for="firstName">First Name:</label>
-                            <input id="firstName" class="Input" type="text" name="firstName" autocorrect="off" autocapitalize="off"
-                                   placeholder="First Name"/>
-                        </div>
-
-
-
-                        <div class="col-sm-9 myInput" >
-                            <label for="lastName">Last Name:</label>
-                            <input id="lastName" class="Input" type="text" name="lastName" autocorrect="off" autocapitalize="off"
-                                   placeholder="Last Name"/>
-                        </div>
-
-
-                        <div class="col-sm-9 myInput">
-                            <label for="contact">Phone #:</label>
-                            <input id="contact" class="Input" type="text" name="contact" autocorrect="off" autocapitalize="off"
-                                   placeholder="Phone Number"/>
-                        </div>
-
-
-                        <div class="col-sm-9 myInput">
-                            <label for="address">Address:</label>
-                    <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"
-                              placeholder="Address"> </textarea>
-                        </div>
-
-
-                        <div class="col-sm-9 myInput">
-                            <label for="email">Email:</label>
-                            <input id="email" class="Input" type="email" name="email" autocorrect="off" autocapitalize="off"
-                                   placeholder="Email"/>
-                        </div>
-                        <div class="col-sm-9 myInput">
-                            <label for="association">Guest of:</label>
-                            <div class="btn-group" id="association" role="group" aria-label="...">
-                                <button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride</button>
-                                <button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>
-                                <button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom</button>
-                            </div>
-
-                        </div>
-
-
-                        <div class="col-sm-9 myInput">
-                            <label for="attendings">Attending:</label>
-                            <div class="btn-group" id="attendings" role="group" aria-label="...">
-                                <button type="button" class="btn btn-default btn-attend active" id="yes">Yes</button>
-                                <button type="button" class="btn btn-default btn-attend" id="no">No</button>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-9 myInput">
-                            <div class="form-group">
-                                <label for="menuSel">Menu:</label>
-                                <select class="form-control" id="menuSel">
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-9 myInput">
-                            <label for="plusOne">Plus One:</label>
-                            <div class="btn-group" id="plusOne" role="group" aria-label="...">
-                                <button type="button" class="btn btn-default btn-plus" id="plusYes">Yes</button>
-                                <button type="button" class="btn btn-default btn-plus active" id="plusNo">No</button>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-9 plusOne">
+                        <form name="signupEdit" method="post" action="/#" id="rsvp_edit">
 
                             <div class="col-sm-9 myInput ">
-                                <label for="plusOneId">ID:</label>
-                                <input id="plusOneId" class="Input readonly"  readonly type="text" name="id" autocorrect="off" autocapitalize="off"
+                                <label for="id">ID:</label>
+                                <input id="id" class="Input readonly" readonly type="text" name="id" autocorrect="off"
+                                       autocapitalize="off"
                                        placeholder="ID"/>
                             </div>
 
-                            <div class="col-sm-9 myInput">
-                                <label for="plusOneName">Plus One Name:</label>
-                                <input id="plusOneName" class="Input" type="text" name="plusOneName" autocorrect="off" autocapitalize="off"
-                                       placeholder="Name"/>
+
+                            <div class="col-sm-9 myInput ">
+                                <label for="firstName">First Name:</label>
+                                <input id="firstName" class="Input" type="text" name="firstName" autocorrect="off"
+                                       autocapitalize="off"
+                                       placeholder="First Name"/>
                             </div>
 
+
+                            <div class="col-sm-9 myInput">
+                                <label for="lastName">Last Name:</label>
+                                <input id="lastName" class="Input" type="text" name="lastName" autocorrect="off"
+                                       autocapitalize="off"
+                                       placeholder="Last Name"/>
+                            </div>
+
+
+                            <div class="col-sm-9 myInput">
+                                <label for="contact">Phone #:</label>
+                                <input id="contact" class="Input" type="text" name="contact" autocorrect="off"
+                                       autocapitalize="off"
+                                       placeholder="Phone Number"/>
+                            </div>
+
+
+                            <div class="col-sm-9 myInput">
+                                <label for="address">Address:</label>
+                    <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off"
+                              autocapitalize="off"
+                              placeholder="Address"> </textarea>
+                            </div>
+
+
+                            <div class="col-sm-9 myInput">
+                                <label for="email">Email:</label>
+                                <input id="email" class="Input" type="email" name="email" autocorrect="off"
+                                       autocapitalize="off"
+                                       placeholder="Email"/>
+                            </div>
+                            <div class="col-sm-9 myInput">
+                                <label for="association">Guest of:</label>
+
+                                <div class="btn-group" id="association" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>
+                                    <button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom
+                                    </button>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-9 myInput">
+                                <label for="attendings">Attending:</label>
+
+                                <div class="btn-group" id="attendings" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-default btn-attend active" id="yes">Yes
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-attend" id="no">No</button>
+                                </div>
+
+                            </div>
                             <div class="col-sm-9 myInput">
                                 <div class="form-group">
-                                    <label for="menuSelPlusOne">Menu:</label>
-                                    <select class="form-control" id="menuSelPlusOne">
+                                    <label for="menuSel">Menu:</label>
+                                    <select class="form-control" id="menuSel">
                                     </select>
                                 </div>
                             </div>
-                        </div>
 
 
+                            <div class="col-sm-9 myInput">
+                                <label for="plusOne">Plus One:</label>
 
-                        <div class="col-sm-9 myInput error">
-                            <h2> Please fill out the entire form</h2>
-                        </div>
-
-                        <div class="col-sm-9 myInput">
-                            <a href="#" class="button btn btn-default" id="submitEdit">
-                                <span id="button_submit_text">Submit Edit</span>
-                            </a>
-                        </div>
-                    </form>
+                                <div class="btn-group" id="plusOne" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-default btn-plus" id="plusYes">Yes</button>
+                                    <button type="button" class="btn btn-default btn-plus active" id="plusNo">No
+                                    </button>
+                                </div>
+                            </div>
 
 
+                            <div class="col-sm-9 plusOne">
+
+                                <div class="col-sm-9 myInput ">
+                                    <label for="plusOneId">ID:</label>
+                                    <input id="plusOneId" class="Input readonly" readonly type="text" name="id"
+                                           autocorrect="off" autocapitalize="off"
+                                           placeholder="ID"/>
+                                </div>
+
+                                <div class="col-sm-9 myInput">
+                                    <label for="plusOneName">Plus One Name:</label>
+                                    <input id="plusOneName" class="Input" type="text" name="plusOneName"
+                                           autocorrect="off" autocapitalize="off"
+                                           placeholder="Name"/>
+                                </div>
+
+                                <div class="col-sm-9 myInput">
+                                    <div class="form-group">
+                                        <label for="menuSelPlusOne">Menu:</label>
+                                        <select class="form-control" id="menuSelPlusOne">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-9 myInput error">
+                                <h2> Please fill out the entire form</h2>
+                            </div>
+
+                            <div class="col-sm-9 myInput">
+                                <a href="#" class="button btn btn-default" id="submitEdit">
+                                    <span>Submit Edit</span>
+                                </a>
+                            </div>
+                            <div class="col-sm-9 myInput">
+                                <a href="#" class="button btn btn-default" id="editCancel">
+                                    <span>Cancel</span>
+                                </a>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
-
 
 
             </div>
@@ -237,76 +273,74 @@
 <script src="src/js/vendor/jquery.cookie.js"></script>
 <script src="src/js/vendor/jquery.jsontotable.js"></script>
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
-   <script>
+<script>
 
-       var serverURL = "http://localhost:8080/";
+    var serverURL = "http://localhost:8080/";
 
-       var adminPass;
+    var adminPass;
 
-       var allData;
+    var allData;
+    var allMeals;
 
-       var getListOnSuccess = function(data) {
+    var getListOnSuccess = function (data) {
 
-           allData = data;
-           $(".adminConsole").show();
+        allData = data;
+        $(".adminConsole").show();
 
-           $("tbody").remove();
-           var body = $('<tbody class="tbdy"></tbody>');
+        $("tbdy").remove();
+        var body = $('<tbody class="tbdy"></tbody>');
 
-           $.each(data, function(i, item) {
-
-
-               var plusOneInfoName = '';
-               var plusOneInfoMeal = '';
-                var p
-               if (!!item.plusOneInfo) {
-                   plusOneInfoName = item.plusOneInfo.name;
-                   plusOneInfoMeal = item.plusOneInfo.mealChoiceId;
-               }
-               var rowStr = '<tr>' +
-
-                       '<td>' + item.id + '</td>' +
-                       '<td>' + item.firstName + '</td>' +
-                       '<td>' + item.lastName + '</td>' +
-                       '<td>' + item.phoneNumber + '</td>' +
-                       '<td>' + item.email + '</td>' +
-                       '<td>' + item.statusId + '</td>' +
-                       '<td>' + item.mealId + '</td>' +
-                       '<td>' + item.address + '</td>' +
-                       '<td>' + item.association + '</td>' +
-                       '<td>' + item.notes + '</td>' +
-                       '<td>' + plusOneInfoName + '</td>' +
-                       '<td>' + plusOneInfoMeal+ '</td>' +
-                       '<td> <a href="#" class="editIcon" id="edit_icon_' +item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
-                               '</row>';
+        $.each(data, function (i, item) {
 
 
-console.log(rowStr);
+            var plusOneInfoName = '';
+            var plusOneInfoMeal = '';
+            var p
+            if (!!item.plusOneInfo) {
+                plusOneInfoName = item.plusOneInfo.name;
+                plusOneInfoMeal = item.plusOneInfo.mealChoiceId;
+            }
+            var rowStr = '<tr>' +
+
+                    '<td>' + item.id + '</td>' +
+                    '<td>' + item.firstName + '</td>' +
+                    '<td>' + item.lastName + '</td>' +
+                    '<td>' + item.phoneNumber + '</td>' +
+                    '<td>' + item.email + '</td>' +
+                    '<td>' + item.statusId + '</td>' +
+                    '<td>' + item.mealId + '</td>' +
+                    '<td>' + item.address + '</td>' +
+                    '<td>' + item.association + '</td>' +
+                    '<td>' + item.notes + '</td>' +
+                    '<td>' + plusOneInfoName + '</td>' +
+                    '<td>' + plusOneInfoMeal + '</td>' +
+                    '<td> <a href="#" class="editIcon" id="edit_icon_' + item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
+                    '</row>';
 
 
-               var row = $(rowStr);
-               body.append(row);
+            console.log(rowStr);
 
 
-           });
-console.log(body);
-           $("table").append(body);
-           $(".editIcon").on('click', function(event) {
-               event.preventDefault();
-               var elem=$(event.target);
-               console.log(elem);
-
-              var id =  $(event.target).parent('a').attr('id').substring(10);
-               showDataFor(id);
-
-               $("#submitEdit").on('click',submitEditedGuest);
-
-           });
-       };
-
-    var submitEditedGuest = function() {
+            var row = $(rowStr);
+            body.append(row);
 
 
+        });
+        $("table").append(body);
+        $(".editIcon").on('click', function (event) {
+            event.preventDefault();
+            var elem = $(event.target);
+            console.log(elem);
+
+            var id = $(event.target).parent('a').attr('id').substring(10);
+            showDataFor(id);
+
+            $("#submitEdit").on('click', submitEditedGuest);
+
+        });
+    };
+
+    var submitEditedGuest = function () {
 
 
         $('.error').hide();
@@ -320,7 +354,6 @@ console.log(body);
         var menu = $('#menuSel option:selected').attr('id');
 
 
-
         var plusOneStatus = true;
 
 
@@ -329,44 +362,41 @@ console.log(body);
         isValid = firstName && lastName && email && contact && address && menu;
 
 
-
-
         var obj = {
-            'firstName' : firstName,
+            'firstName': firstName,
             'lastName': lastName,
-            'email' : email,
-            'phoneNumber' : contact,
-            'address' : address,
-            'statusId' : attending?'1':'0',
-            'mealId' : menu,
+            'email': email,
+            'phoneNumber': contact,
+            'address': address,
+            'statusId': attending ? '1' : '0',
+            'mealId': menu,
 //               'plusOneStatus' : plusOneStatus,
             'notes': '',
-            'association' :association,
-            'id':id
+            'association': association,
+            'id': id
         };
-
 
 
         if (plusOneStatus) {
             var plusOneName = $('#plusOneName').val().trim();
             var meal = $('#menuSelPlusOne option:selected').attr('id');
             var plusOneInfo = {
-                'name' : plusOneName,
-                'mealChoiceId'  : meal,
-                'id':   plusOneId
+                'name': plusOneName,
+                'mealChoiceId': meal,
+                'id': plusOneId
             }
             obj.plusOneInfo = plusOneInfo;
         }
 
         verb = "PUT";
 
-        var onComplete = function(a,b,c) {
+        var onComplete = function (a, b, c) {
             console.log('success');
             $('.adminEditSingle').hide();
 
         }
 
-        var onError = function(a,b,c) {
+        var onError = function (a, b, c) {
             console.log('failed');
         }
         if (isValid) {
@@ -376,14 +406,14 @@ console.log(body);
             if (isEdit) {
 
             }
-            $.ajax( {
+            $.ajax({
                 url: url,
                 type: "PUT",
                 data: JSON.stringify(obj),
-                dataType:"json",
+                dataType: "json",
                 contentType: 'application/json',
                 success: onComplete,
-                error:onError
+                error: onError
             })
         } else {
             $('.error').show();
@@ -394,121 +424,198 @@ console.log(body);
     }
 
 
-       //$('#customers').tableExport({type:'excel',escape:'false'});
+    //$('#customers').tableExport({type:'excel',escape:'false'});
 
 
+    var showDataFor = function (id) {
 
-       var showDataFor = function(id) {
-
-           var foundElem;
-           $.each(allData, function(i, item) {
-            if (item.id ==id) {
+        var foundElem;
+        $.each(allData, function (i, item) {
+            if (item.id == id) {
                 foundElem = item;
                 return;
             }
-           });
-           if (foundElem) {
-              $(".adminEditSingle").show();
+        });
+        if (foundElem) {
+            $(".adminEditSingle").show();
 
 
-               console.log('need to fill out variables here');
+            console.log('need to fill out variables here');
 
-               $('#id').val(foundElem.id);
-               $('#firstName').val(foundElem.firstName);
-               $('#lastName').val(foundElem.lastName);
-               $('#email').val(foundElem.email);
-               $('#contact').val(foundElem.phoneNumber);
-               $('#address').val(foundElem.address);
-               if (foundElem.statusId  == 1) {
-                   $("#yes").click();
-               } else {
-                   $("#no").click();
-               }
-               if (foundElem.association ==="bride") {
-                   $('#brideAssoc').click();
-               } else if (foundElem.association === "groom") {
-                   $('#groomAssoc').click();
-               } else {
-                   $('#bothAssoc').click();
-               }
+            $('#id').val(foundElem.id);
+            $('#firstName').val(foundElem.firstName);
+            $('#lastName').val(foundElem.lastName);
+            $('#email').val(foundElem.email);
+            $('#contact').val(foundElem.phoneNumber);
+            $('#address').val(foundElem.address);
+            if (foundElem.statusId == 1) {
+                $("#yes").click();
+            } else {
+                $("#no").click();
+            }
+            if (foundElem.association === "bride") {
+                $('#brideAssoc').click();
+            } else if (foundElem.association === "groom") {
+                $('#groomAssoc').click();
+            } else {
+                $('#bothAssoc').click();
+            }
 
-               $('#menuSel').val( foundElem.mealId );
+            $('#menuSel').val(foundElem.mealId);
 
-               if (foundElem.plusOneInfo) {
-                   $('#plusYes').click();
-                   plusOneId = foundElem.plusOneInfo.id;
-                   $('#menuSelPlusOne').val( foundElem.plusOneInfo.mealChoiceId );
-                   $('#plusOneName').val(foundElem.plusOneInfo.name);
-                   $('#plusOneId').val(foundElem.plusOneInfo.id);
-               }
-
-
+            if (foundElem.plusOneInfo) {
+                $('#plusYes').click();
+                plusOneId = foundElem.plusOneInfo.id;
+                $('#menuSelPlusOne').val(foundElem.plusOneInfo.mealChoiceId);
+                $('#plusOneName').val(foundElem.plusOneInfo.name);
+                $('#plusOneId').val(foundElem.plusOneInfo.id);
+            }
 
 
-           }
-       }
-       var getListOnError = function(data) {
+        }
+    }
+    var getListOnError = function (data) {
 
 
-           $(".adminConsole").hide();
-           $(".error").removeClass('hidden');
-       };
+        $(".adminConsole").hide();
+        $(".error").removeClass('hidden');
+    };
 
+    var getListOfMealsOnSuccess = function (data) {
 
-       var getList = function () {
-           $.ajax( {
-               url: serverURL + "admin/guests",
-               type: "GET",
-               dataType:"json",
-               contentType: 'application/json',
-               headers: { 'Authorization': adminPass },
-               success: getListOnSuccess,
-               error:getListOnError
-           });
+        $(".adminMeal").show();
 
-       }
+        allMeals = data;
 
+        $("tbdyMeal").remove();
+        var body = $('<tbody class="tbdyMeal"></tbody>');
 
-       $(document).ready(function () {
-
-           $(".adminConsole").hide();
-           $(".adminDashboard").hide();
-           $(".adminEditSingle").hide();
-
-
-           $("#getAllRSVPs").on('click', function() {
-                       console.log(adminPass);
-                       $(".error").addClass('hidden');
-                       getList();
-                   }
-
-           );
-           $("#submitPass").on('click', function(e) {
-           adminPass = $("#adminPass").val().trim();
-
-               $.ajax( {
-                   url: serverURL + "admin/login/",
-                   type: "GET",
-                   dataType:"json",
-                   contentType: 'application/json',
-                   headers: { 'Authorization': adminPass },
-                   success: function () {
-                       $(".adminDashboard").show();
-                       $(".loginDiv").hide();
-                   },
-                   error: function () {
-                       alert('Invalid Password');
-                   }
-               });
+        $.each(data, function (i, item) {
 
 
 
+            var rowStr = '<tr>' +
 
-           });
-           
-       });
-       
-       
-   </script>
+                    '<td>' + item.id + '</td>' +
+                    '<td>' + item.name + '</td>' +
+                    '<td> <a href="#" class="editIconMeal" id="edit_meal_' + item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
+                    '</row>';
+
+
+            console.log(rowStr);
+
+
+            var row = $(rowStr);
+            body.append(row);
+
+
+        });
+        $("#tblMeal").append(body);
+        $(".editIconMeal").on('click', function (event) {
+            event.preventDefault();
+            var elem = $(event.target);
+            console.log(elem);
+
+            var id = $(event.target).parent('a').attr('id').substring(10);
+            showMealDataFor(id);
+
+            $("#submitMealEdit").on('click', submitEditMeal);
+
+        });
+    };
+
+    var showMealDataFor = function(id) {
+        console.log('todo show data');
+
+    }
+    var submitEditMeal = function() {
+
+    }
+
+    var getListOfMeals = function(onSuccess, onError) {
+        //$('.adminMeal').hide();
+        $.ajax({
+            url: serverURL + "/meal/",
+            type: "GET",
+            dataType: "json",
+            contentType: 'application/json',
+            headers: {'Authorization': adminPass},
+            success: onSuccess ,
+            error: onError
+        });
+
+    }
+    var getList = function () {
+        $.ajax({
+            url: serverURL + "admin/guests",
+            type: "GET",
+            dataType: "json",
+            contentType: 'application/json',
+            headers: {'Authorization': adminPass},
+            success: getListOnSuccess,
+            error: getListOnError
+        });
+
+    }
+
+
+    $(document).ready(function () {
+
+        $(".adminConsole").hide();
+        $(".adminDashboard").hide();
+        $(".adminEditSingle").hide();
+        $('.adminMeal').hide();
+
+
+        $("#getAllRSVPs").on('click', function () {
+                    console.log(adminPass);
+                    $(".error").addClass('hidden');
+                    getList();
+                }
+        );
+        $("#getAllMeals").on('click', function() {
+            getListOfMeals(getListOfMealsOnSuccess);
+        })
+        $("#adminPass").keyup(function(e) {
+            if (e.keyCode == 13) {
+                event.preventDefault();
+                $("#submitPass").click();
+            }
+        });
+        $("#adminPass").keydown(function(e) {
+            if (e.keyCode == 13) {
+                event.preventDefault();
+                $("#submitPass").click();
+            }
+        });
+
+        $("#editCancel").on('click', function() {
+            $(".adminEditSingle").hide();
+        });
+        $("#submitPass").on('click', function (e) {
+            adminPass = $("#adminPass").val().trim();
+
+            $.ajax({
+                url: serverURL + "admin/login/",
+                type: "GET",
+                dataType: "json",
+                contentType: 'application/json',
+                headers: {'Authorization': adminPass},
+                success: function () {
+                    $(".adminDashboard").show();
+                    $(".loginDiv").hide();
+                },
+                error: function () {
+                    alert('Invalid Password');
+                }
+            });
+
+
+        });
+
+    });
+
+
+</script>
 </body>
 </html>
