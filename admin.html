@@ -101,7 +101,8 @@
 
                             <div class="col-sm-9 myInput ">
                                 <label for="meal_id">ID:</label>
-                                <input id="meal_id" class="Input readonly" readonly type="text" name="meal_id" autocorrect="off"
+                                <input id="meal_id" class="Input readonly" readonly type="text" name="meal_id"
+                                       autocorrect="off"
                                        autocapitalize="off"
                                        placeholder="ID"/>
                             </div>
@@ -131,34 +132,33 @@
             </div>
 
 
-
             <div class="col-sm-10 adminConsole">
 
-                    <div>
-                        <table id="tbl" class="table table-hover">
+                <div>
+                    <table id="tbl" class="table table-hover">
 
-                            <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>first Name</th>
-                                <th>Last Name</th>
-                                <th>phone Number</th>
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th>Meal</th>
-                                <th>Address</th>
-                                <th>association</th>
-                                <th>Notes</th>
-                                <th>Plus One</th>
-                                <th>Plus One Meal</th>
-                                <th>Edit</th>
-                            </tr>
-                            </thead>
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>first Name</th>
+                            <th>Last Name</th>
+                            <th>phone Number</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Meal</th>
+                            <th>Address</th>
+                            <th>association</th>
+                            <th>Notes</th>
+                            <th>Plus One</th>
+                            <th>Plus One Meal</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
 
-                        </table>
+                    </table>
 
 
-                    </div>
+                </div>
 
                 <div class="row adminEditSingle">
 
@@ -310,318 +310,33 @@
 </div>
 
 <script src="src/js/rest.js"></script>
+<script src="src/js/admin/dashboard.js"></script>
+<script src="src/js/admin/meal.js"></script>
+<script src="src/js/admin/guest.js"></script>
+
 <script src="src/js/vendor/jquery-2.1.3.js"></script>
 <script src="src/js/vendor/jquery.cookie.js"></script>
 <script src="src/js/vendor/jquery.jsontotable.js"></script>
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
 <script>
-
     var serverURL = "http://localhost:8080/";
-
     var adminPass;
-
     var allData;
     var allMeals;
     var allMealMap;
 
-    var getMealName = function(mealId) {
-        if (!allMealMap || !mealId) {return '';}
-        return allMealMap[mealId];
-
-    }
-    var getListOnSuccess = function (data) {
-
-        allData = data;
-        $(".adminConsole").show();
-
-        $(".tbdy").remove();
-        var body = $('<tbody class="tbdy"></tbody>');
-
-        $.each(data, function (i, item) {
-
-
-            var plusOneInfoName = '';
-            var plusOneInfoMeal = '';
-            if (!!item.plusOneInfo) {
-                plusOneInfoName = item.plusOneInfo.name;
-                plusOneInfoMeal = getMealName(item.plusOneInfo.mealChoiceId );
-            }
-            var rowStr = '<tr>' +
-
-                    '<td>' + item.id + '</td>' +
-                    '<td>' + item.firstName + '</td>' +
-                    '<td>' + item.lastName + '</td>' +
-                    '<td>' + item.phoneNumber + '</td>' +
-                    '<td>' + item.email + '</td>' +
-                    '<td>' + item.statusId + '</td>' +
-                    '<td>' + getMealName(item.mealId )+ '</td>' +
-                    '<td>' + item.address + '</td>' +
-                    '<td>' + item.association + '</td>' +
-                    '<td>' + item.notes + '</td>' +
-                    '<td>' + plusOneInfoName + '</td>' +
-                    '<td>' + plusOneInfoMeal + '</td>' +
-                    '<td> <a href="#" class="editIcon" id="edit_icon_' + item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
-                    '</row>';
-
-
-            var row = $(rowStr);
-            body.append(row);
-
-
-        });
-        $("#tbl").append(body);
-        $(".editIcon").on('click', function (event) {
-            event.preventDefault();
-            var elem = $(event.target);
-            console.log(elem);
-
-            var id = $(event.target).parent('a').attr('id').substring(10);
-            showDataFor(id);
-
-            $("#submitEdit").on('click', submitEditedGuest);
-
-        });
-    };
-
-
-    var submitEditedGuest = function () {
-
-
-        $('.error').hide();
-        var id = $('#id').val().trim();
-        var firstName = $('#firstName').val().trim();
-        var lastName = $('#lastName').val().trim();
-        var email = $('#email').val().trim();
-        var contact = $('#contact').val().trim();
-        var address = $('#address').val().trim();
-        var attending = attendingStatus;
-        var menu = $('#menuSel option:selected').attr('id');
-
-
-        var plusOneStatus = true;
-
-
-        var isValid = true;
-
-        isValid = firstName && lastName && email && contact && address && menu;
-
-
-        var obj = {
-            'firstName': firstName,
-            'lastName': lastName,
-            'email': email,
-            'phoneNumber': contact,
-            'address': address,
-            'statusId': attending ? '1' : '0',
-            'mealId': menu,
-//               'plusOneStatus' : plusOneStatus,
-            'notes': '',
-            'association': association,
-            'id': id
-        };
-
-
-        if (plusOneStatus) {
-            var plusOneName = $('#plusOneName').val().trim();
-            var meal = $('#menuSelPlusOne option:selected').attr('id');
-            var plusOneInfo = {
-                'name': plusOneName,
-                'mealChoiceId': meal,
-                'id': plusOneId
-            }
-            obj.plusOneInfo = plusOneInfo;
-        }
-
-        verb = "PUT";
-
-        var onComplete = function (a, b, c) {
-            console.log('success');
-            $('.adminEditSingle').hide();
-
-        }
-
-        var onError = function (a, b, c) {
-            console.log('failed');
-        }
-        if (isValid) {
-            console.log('submitting');
-            var verb = "POST";
-            var url = serverURL + "admin/guest/" + obj.id;
-            if (isEdit) {
-
-            }
-            callAjax(url, verb,obj, onComplete, onError);
-
-        } else {
-            $('.error').show();
-        }
-        console.log(JSON.stringify(obj));
-
-
-    }
-
-
     //$('#customers').tableExport({type:'excel',escape:'false'});
 
-
-    var showDataFor = function (id) {
-
-        var foundElem;
-        $.each(allData, function (i, item) {
-            if (item.id == id) {
-                foundElem = item;
-                return;
-            }
-        });
-        if (foundElem) {
-            $(".adminEditSingle").show();
-
-
-            console.log('need to fill out variables here');
-
-            $('#id').val(foundElem.id);
-            $('#firstName').val(foundElem.firstName);
-            $('#lastName').val(foundElem.lastName);
-            $('#email').val(foundElem.email);
-            $('#contact').val(foundElem.phoneNumber);
-            $('#address').val(foundElem.address);
-            if (foundElem.statusId == 1) {
-                $("#yes").click();
-            } else {
-                $("#no").click();
-            }
-            if (foundElem.association === "bride") {
-                $('#brideAssoc').click();
-            } else if (foundElem.association === "groom") {
-                $('#groomAssoc').click();
-            } else {
-                $('#bothAssoc').click();
-            }
-
-            $('#menuSel').val(foundElem.mealId);
-
-            if (foundElem.plusOneInfo) {
-                $('#plusYes').click();
-                plusOneId = foundElem.plusOneInfo.id;
-                $('#menuSelPlusOne').val(foundElem.plusOneInfo.mealChoiceId);
-                $('#plusOneName').val(foundElem.plusOneInfo.name);
-                $('#plusOneId').val(foundElem.plusOneInfo.id);
-            }
-
-
-        }
-    }
     var getListOnError = function (data) {
-
-
         $(".adminConsole").hide();
         $(".error").removeClass('hidden');
     };
 
-    var getListOfMealsOnSuccess = function (data) {
-
-        $(".adminMeal").show();
-
-        allMeals = data;
-
-        $(".tbdyMeal").remove();
-        var body = $('<tbody class="tbdyMeal"></tbody>');
-
-        $.each(data, function (i, item) {
-
-
-
-            var rowStr = '<tr>' +
-
-                    '<td>' + item.id + '</td>' +
-                    '<td>' + item.name + '</td>' +
-                    '<td> <a href="#" class="editIconMeal" id="edit_meal_' + item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
-                    '</row>';
-            var row = $(rowStr);
-            body.append(row);
-
-
-        });
-        $("#tblMeal").append(body);
-        $(".editIconMeal").on('click', function (event) {
-            event.preventDefault();
-            var elem = $(event.target);
-            console.log(elem);
-
-            var id = $(event.target).parent('a').attr('id').substring(10);
-            showMealDataFor(id);
-
-            $("#submitMealEdit").on('click', submitEditMeal);
-
-        });
-    };
-
-    var showMealDataFor = function(id) {
-
-        var meal = allMealMap[id];
-        if (meal) {
-
-            $('#meal_id').val(id);
-           $('#meal_name').val(meal);
-
-
-            $('.editMealRow').show();
-            $('.edMeal').text('Edit Meal');
-        }
-    }
-    var submitEditMeal = function() {
-        var id = $('#meal_id').val().trim();
-        var name = $('#meal_name').val().trim();
-        var obj = {
-            'id':id,
-            'name':name
-        }
-        var url = serverURL + "admin/meal/";
-        var verb = "POST";
-        if (id) {
-            verb = "PUT";
-            url = url + id;
-        }
-
-        var onSuccess = function () {
-            $(".editMealRow").hide();
-            getListOfMeals(getListOfMealsOnSuccess, getListOnError);
-        }
-        adminCallAjax(url,verb,obj,onSuccess, null);
-
-    }
-
-    var getListOfMeals = function(onSuccess, onError) {
-        callAjax(serverURL + "meal/", "GET", null, onSuccess, onError);
-    }
-    var getList = function () {
-        callAjax(serverURL + "admin/guests", "GET", null, getListOnSuccess, getListOnError);
-    }
-
-    var prePopMealList =  function(data) {
-
-        allMeals = data;
-
-        allMealMap = {};
-        for(var i = 0; i < data.length; i++) {
-            var obj = data[i];
-
-            allMealMap[obj.id] = (obj.name);
-
-        }
-        console.log('check here');
-    };
-
-    var hideAll = function() {
-        $(".adminConsole").hide();
-        $('.editMealRow').hide();
-        $(".adminEditSingle").hide();
-        $('.adminMeal').hide();
-
-    }
     $(document).ready(function () {
         $(".adminDashboard").hide();
         hideAll();
+        getListOfMeals(prePopMealList);
+
         $("#getAllRSVPs").on('click', function () {
                     hideAll();
                     console.log(adminPass);
@@ -630,35 +345,36 @@
                 }
         );
 
-
-        getListOfMeals(prePopMealList);
-        $("#getAllMeals").on('click', function() {
+        $("#getAllMeals").on('click', function () {
             hideAll();
             getListOfMeals(getListOfMealsOnSuccess);
         })
-        $("#adminPass").keyup(function(e) {
+        $("#adminPass").keyup(function (e) {
             if (e.keyCode == 13) {
                 event.preventDefault();
                 $("#submitPass").click();
             }
         });
-        $("#adminPass").keydown(function(e) {
+        $("#adminPass").keydown(function (e) {
             if (e.keyCode == 13) {
                 event.preventDefault();
                 $("#submitPass").click();
             }
         });
 
-        $('#addMeal').on('click', function() {
-        $('.editMealRow').show();
+        $('#addMeal').on('click', function () {
+            $('#meal_id').val('');
+            $('#meal_name').val('');
+            $('.editMealRow').show();
+
             $('.edMeal').text('Add Meal');
         });
 
-        $('#submitEditMeal').on('click', function() {
+        $('#submitEditMeal').on('click', function () {
             submitEditMeal();
-            });
+        });
 
-        $("#editCancel").on('click', function() {
+        $("#editCancel").on('click', function () {
             $(".adminEditSingle").hide();
         });
         $("#submitPass").on('click', function (e) {
@@ -667,11 +383,9 @@
             adminCallAjax(serverURL + "admin/login/", "GET", null, function () {
                 $(".adminDashboard").show();
                 $(".loginDiv").hide();
-            },function () {
+            }, function () {
                 alert('Invalid Password');
             });
-
-
 
 
         });
