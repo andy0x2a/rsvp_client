@@ -86,8 +86,48 @@
 
                     </table>
 
+                    <div class="col-sm-9 myInput">
+                        <a href="#" class="button btn btn-default" id="addMeal">
+                            <span>Add Meal</span>
+                        </a>
+                    </div>
 
                 </div>
+                <div class="row editMealRow">
+                    <div class="col-sm-10 ">
+
+
+                        <form name="mealEdit" method="post" action="/#" id="meal_edit">
+
+                            <div class="col-sm-9 myInput ">
+                                <label for="meal_id">ID:</label>
+                                <input id="meal_id" class="Input readonly" readonly type="text" name="meal_id" autocorrect="off"
+                                       autocapitalize="off"
+                                       placeholder="ID"/>
+                            </div>
+
+                            <div class="col-sm-9 myInput ">
+                                <label for="meal_name">Name:</label>
+                                <input id="meal_name" class="Input " type="text" name="meal_name" autocorrect="off"
+                                       autocapitalize="off"
+                                       placeholder="Name"/>
+                            </div>
+
+                            <div class="col-sm-9 myInput">
+                                <a href="#" class="button btn btn-default" id="submitEditMeal">
+                                    <span>Submit Edit</span>
+                                </a>
+                            </div>
+                            <div class="col-sm-9 myInput">
+                                <a href="#" class="button btn btn-default" id="editCancelMeal">
+                                    <span>Cancel</span>
+                                </a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
             </div>
 
 
@@ -275,7 +315,7 @@
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
 <script>
 
-    var serverURL = "http://localhost:8080/";
+    var serverURL = "http://localhost:8080/rsvp/";
 
     var adminPass;
 
@@ -341,6 +381,7 @@
 
         });
     };
+
 
     var submitEditedGuest = function () {
 
@@ -571,7 +612,7 @@
 
     var hideAll = function() {
         $(".adminConsole").hide();
-
+        $('.editMealRow').hide();
         $(".adminEditSingle").hide();
         $('.adminMeal').hide();
 
@@ -605,6 +646,14 @@
                 $("#submitPass").click();
             }
         });
+
+        $('#addMeal').on('click', function() {
+        $('.editMealRow').show();
+        });
+
+        $('#submitEditMeal').on('click', function() {
+                submitMeal();
+            });
 
         $("#editCancel").on('click', function() {
             $(".adminEditSingle").hide();
