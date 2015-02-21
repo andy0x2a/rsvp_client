@@ -115,7 +115,7 @@
                             </div>
 
 
-                            <div class="col-sm-9">
+                            <div class="col-sm-10">
                                 <div class="col-sm-3 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="submitEditMeal">
                                         <span id="edMeal">Submit Edit</span>
@@ -296,20 +296,20 @@
                                 <h2> Please fill out the entire form</h2>
                             </div>
 
-                            <div clas="col-sm-9">
+                            <div clas="col-sm-10">
 
-                                <div class="col-sm-9 myInput adminButton">
+                                <div class="col-sm-3 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="submitEdit">
                                         <span>Submit Edit</span>
                                     </a>
                                 </div>
 
-                                <div class="col-sm-9 myInput adminButton">
+                                <div class="col-sm-3 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="editDelete">
                                         <span>Delete Guest</span>
                                     </a>
                                 </div>
-                                <div class="col-sm-9 myInput adminButton">
+                                <div class="col-sm-3 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="editCancel">
                                         <span>Cancel</span>
                                     </a>
@@ -366,12 +366,17 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
                     hideAll();
                     console.log(adminPass);
                     $(".error").addClass('hidden');
+
+       
+
                     getList();
                 }
         );
 
         $("#getAllMeals").on('click', function () {
             hideAll();
+            $(".adminMeal").show();
+          $(".adminMeal").spin();
             getListOfMeals(getListOfMealsOnSuccess);
         })
         $("#adminPass").keyup(function (e) {

@@ -3,7 +3,6 @@
  */
 var getListOfMealsOnSuccess = function (data) {
 
-    $(".adminMeal").show();
 
     allMeals = data;
 
@@ -36,6 +35,8 @@ var getListOfMealsOnSuccess = function (data) {
         $("#submitMealEdit").on('click', submitEditMeal);
 
     });
+
+    $(".adminMeal").spin(false);
 };
 
 var showMealDataFor = function (id) {
@@ -52,6 +53,7 @@ var showMealDataFor = function (id) {
     }
 }
 var submitEditMeal = function () {
+    $(".editMealRow").spin();
     var id = $('#meal_id').val().trim();
     var name = $('#meal_name').val().trim();
     var obj = {
@@ -66,6 +68,7 @@ var submitEditMeal = function () {
     }
 
     var onSuccess = function () {
+        $(".editMealRow").spin(false);
         $(".editMealRow").hide();
         getListOfMeals(getListOfMealsOnSuccess, getListOnError);
     }
