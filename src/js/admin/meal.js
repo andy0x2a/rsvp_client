@@ -80,7 +80,6 @@ var getListOfMeals = function (onSuccess, onError) {
 var prePopMealList = function (data) {
 
     allMeals = data;
-
     allMealMap = {};
     for (var i = 0; i < data.length; i++) {
         var obj = data[i];

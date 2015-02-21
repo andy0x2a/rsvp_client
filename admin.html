@@ -16,7 +16,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">Jen and Matt</a>
+            <a class="navbar-brand" href="index.html">Em and Andy</a>
         </div>
     </div>
 </div>
@@ -114,16 +114,20 @@
                                        placeholder="Name"/>
                             </div>
 
-                            <div class="col-sm-9 myInput">
-                                <a href="#" class="button btn btn-default" id="submitEditMeal">
-                                    <span id="edMeal">Submit Edit</span>
-                                </a>
+
+                            <div class="col-sm-9">
+                                <div class="col-sm-3 myInput">
+                                    <a href="#" class="button btn btn-default" id="submitEditMeal">
+                                        <span id="edMeal">Submit Edit</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-3 myInput">
+                                    <a href="#" class="button btn btn-default" id="editCancelMeal">
+                                        <span>Cancel</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-sm-9 myInput">
-                                <a href="#" class="button btn btn-default" id="editCancelMeal">
-                                    <span>Cancel</span>
-                                </a>
-                            </div>
+
                         </form>
 
                     </div>
@@ -287,15 +291,18 @@
                                 <h2> Please fill out the entire form</h2>
                             </div>
 
-                            <div class="col-sm-9 myInput">
-                                <a href="#" class="button btn btn-default" id="submitEdit">
-                                    <span>Submit Edit</span>
-                                </a>
-                            </div>
-                            <div class="col-sm-9 myInput">
-                                <a href="#" class="button btn btn-default" id="editCancel">
-                                    <span>Cancel</span>
-                                </a>
+                            <div clas="col-sm-9">
+
+                                <div class="col-sm-9 myInput">
+                                    <a href="#" class="button btn btn-default" id="submitEdit">
+                                        <span>Submit Edit</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-9 myInput">
+                                    <a href="#" class="button btn btn-default" id="editCancel">
+                                        <span>Cancel</span>
+                                    </a>
+                                </div>
                             </div>
                         </form>
 
@@ -319,8 +326,11 @@
 <script src="src/js/vendor/jquery.jsontotable.js"></script>
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
 <script>
-    var serverURL = "http://localhost:8080/";
+//    var serverURL = "http://localhost:8080/";
+var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
+
     var adminPass;
+
     var allData;
     var allMeals;
     var allMealMap;

@@ -64,7 +64,7 @@ var submitEditedGuest = function () {
     var email = $('#email').val().trim();
     var contact = $('#contact').val().trim();
     var address = $('#address').val().trim();
-    var attending = attendingStatus;
+    var attending = true;
     var menu = $('#menuSel option:selected').attr('id');
 
 
@@ -75,6 +75,7 @@ var submitEditedGuest = function () {
 
     isValid = firstName && lastName && email && contact && address && menu;
 
+    association = "test";
 
     var obj = {
         'firstName': firstName,
@@ -101,8 +102,7 @@ var submitEditedGuest = function () {
         obj.plusOneInfo = plusOneInfo;
     }
 
-    verb = "PUT";
-
+    var verb = "PUT"
     var onComplete = function (a, b, c) {
         console.log('success');
         $('.adminEditSingle').hide();
@@ -111,20 +111,18 @@ var submitEditedGuest = function () {
 
     var onError = function (a, b, c) {
         console.log('failed');
-    }
+    };
+
+    isValid = true;
     if (isValid) {
         console.log('submitting');
-        var verb = "POST";
-        var url = serverURL + "admin/guest/" + obj.id;
-        if (isEdit) {
+        var url = serverURL + "guest/" + obj.id;
 
-        }
         callAjax(url, verb, obj, onComplete, onError);
 
     } else {
         $('.error').show();
     }
-    console.log(JSON.stringify(obj));
 
 
 };
