@@ -160,6 +160,9 @@
 <script src="src/js/vendor/jquery-2.1.3.js"></script>
 <script src="src/js/vendor/jquery.cookie.js"></script>
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="src/js/vendor/spin.js"></script>
+
+<script src="src/js/vendor/jquery.spin.js"></script>
    <script>
 
 //       var serverURL = "http://localhost:8080/";
@@ -236,13 +239,16 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
                $.cookie("com.newmansoft.rsvp.client",a.id);
                id = a.id;
                $("#submit").addClass('disabled');
+                  $('#rsvp').spin(false);
                $('#rsvp').hide();
                $('#returning').hide();
                $('#thanks').show();
+
            }
 
            var onError = function(a,b,c) {
                console.log('failed');
+                  $('#rsvp').spin(false);
            }
            if (isValid) {
                console.log('submitting');
@@ -252,7 +258,10 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
                    obj.id = id;
                    verb = "PUT";
                    url = url + id;
+                   if(obj.plusOneInfo && plusOneId) {
+                    
                    obj.plusOneInfo.id = plusOneId;
+                   }
                }
                $.ajax( {
                    url: url,
@@ -265,6 +274,7 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
                })
            } else {
                $('.error').show();
+                  $('#rsvp').spin(false);
            }
            console.log(JSON.stringify(obj));
 
@@ -381,6 +391,7 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
 
            $("#submit").on('click', function (e) {
                e.preventDefault();
+                $('#rsvp').spin();
               processForm();
            });
 
@@ -418,18 +429,21 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
                }
 
                $("#submit").removeClass('disabled');
+                  $('#rsvp').spin(false);
 
            };
 
            var getOnError = function (e) {
 
                alert('something went wrong retrieving the RSVP info');
+                  $('#rsvp').spin(false);
            };
 
            $('#showEditBtn').on('click', function(e) {
                //show form for edit
                e.preventDefault();
                $('#rsvp').show();
+                  $('#rsvp').spin();
 
                $.ajax( {
                    url: serverURL + "guest/" + id,

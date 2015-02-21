@@ -108,7 +108,9 @@ body {
 .myInput {
     margin-bottom: 5px;
 }
-
+.adminButton {
+    margin-right: 10px;
+}
 .plusOne {
     margin-left:40px;
 

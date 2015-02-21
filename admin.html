@@ -116,12 +116,17 @@
 
 
                             <div class="col-sm-9">
-                                <div class="col-sm-3 myInput">
+                                <div class="col-sm-3 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="submitEditMeal">
                                         <span id="edMeal">Submit Edit</span>
                                     </a>
                                 </div>
-                                <div class="col-sm-3 myInput">
+                                   <div class="col-sm-3 myInput adminButton">
+                                    <a href="#" class="button btn btn-default" id="editDeleteMeal">
+                                        <span>Delete</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-3 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="editCancelMeal">
                                         <span>Cancel</span>
                                     </a>
@@ -293,12 +298,18 @@
 
                             <div clas="col-sm-9">
 
-                                <div class="col-sm-9 myInput">
+                                <div class="col-sm-9 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="submitEdit">
                                         <span>Submit Edit</span>
                                     </a>
                                 </div>
-                                <div class="col-sm-9 myInput">
+
+                                <div class="col-sm-9 myInput adminButton">
+                                    <a href="#" class="button btn btn-default" id="editDelete">
+                                        <span>Delete Guest</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-9 myInput adminButton">
                                     <a href="#" class="button btn btn-default" id="editCancel">
                                         <span>Cancel</span>
                                     </a>
@@ -321,10 +332,14 @@
 <script src="src/js/admin/meal.js"></script>
 <script src="src/js/admin/guest.js"></script>
 
+
 <script src="src/js/vendor/jquery-2.1.3.js"></script>
 <script src="src/js/vendor/jquery.cookie.js"></script>
 <script src="src/js/vendor/jquery.jsontotable.js"></script>
 <script src="src/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="src/js/vendor/spin.js"></script>
+
+<script src="src/js/vendor/jquery.spin.js"></script>
 <script>
 //    var serverURL = "http://localhost:8080/";
 var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";

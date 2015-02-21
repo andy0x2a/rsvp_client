@@ -4,7 +4,7 @@
 var getListOnSuccess = function (data) {
 
     allData = data;
-    $(".adminConsole").show();
+   
 
     $(".tbdy").remove();
     var body = $('<tbody class="tbdy"></tbody>');
@@ -53,9 +53,12 @@ var getListOnSuccess = function (data) {
         $("#submitEdit").on('click', submitEditedGuest);
 
     });
+    $('.adminConsole').spin(false);
 };
 var submitEditedGuest = function () {
 
+
+        ('.adminEditSingle').spin();
 
     $('.error').hide();
     var id = $('#id').val().trim();
@@ -105,12 +108,18 @@ var submitEditedGuest = function () {
     var verb = "PUT"
     var onComplete = function (a, b, c) {
         console.log('success');
+
+        $('.adminEditSingle').spin(false);
+
         $('.adminEditSingle').hide();
 
     }
 
     var onError = function (a, b, c) {
         console.log('failed');
+
+        $('.adminEditSingle').spin(false);
+
     };
 
     isValid = true;
@@ -121,6 +130,9 @@ var submitEditedGuest = function () {
         callAjax(url, verb, obj, onComplete, onError);
 
     } else {
+
+        $('.adminEditSingle').spin(false);
+
         $('.error').show();
     }
 
@@ -175,5 +187,7 @@ var showDataFor = function (id) {
     }
 };
 var getList = function () {
+    $(".adminConsole").show();
+     $('.adminConsole').spin();
     adminCallAjax(serverURL + "admin/guests", "GET", null, getListOnSuccess, getListOnError);
 };
