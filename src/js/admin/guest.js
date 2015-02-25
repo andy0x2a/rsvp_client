@@ -99,7 +99,7 @@ var submitEditedGuest = function () {
         var plusOneInfo = {
             'name': plusOneName,
             'mealChoiceId': meal,
-            'id': plusOneId
+            'id':  $('#plusOneId').val().trim()
         }
         obj.plusOneInfo = plusOneInfo;
     }
