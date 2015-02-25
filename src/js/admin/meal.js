@@ -100,3 +100,18 @@ var getMealName = function (mealId) {
 
 };
 
+var populateMealDropdownFromAllMeals = function (dropdownId){
+
+
+    for(var i = 0; i < allMeals.length; i++) {
+        var obj = allMeals[i];
+
+        $(dropdownId)
+            .append($("<option></option>")
+                .attr("value",obj.id)
+                .attr("id",obj.id)
+                .text(obj.name));
+    }
+};
+
+

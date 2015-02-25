@@ -1,6 +1,10 @@
 /**
  * Created by andyn on 2/20/2015.
  */
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+}
 var getListOnSuccess = function (data) {
 
     allData = data;
@@ -58,7 +62,7 @@ var getListOnSuccess = function (data) {
 var submitEditedGuest = function () {
 
 
-        ('.adminEditSingle').spin();
+        $('.adminEditSingle').spin();
 
     $('.error').hide();
     var id = $('#id').val().trim();
@@ -67,18 +71,13 @@ var submitEditedGuest = function () {
     var email = $('#email').val().trim();
     var contact = $('#contact').val().trim();
     var address = $('#address').val().trim();
-    var attending = true;
     var menu = $('#menuSel option:selected').attr('id');
-
-
-    var plusOneStatus = true;
-
-
-    var isValid = true;
-
-    isValid = firstName && lastName && email && contact && address && menu;
-
-    association = "test";
+    var plusOneStatus = $("#plusYes").hasClass('active');
+    var association =$('#association option:selected').attr('val').toLowerCase();
+    var attending = true;
+    if  ($('#attendings option:selected').attr('id').toLowerCase() == 'no') {
+        attending = false;
+    }
 
     var obj = {
         'firstName': firstName,
@@ -105,18 +104,21 @@ var submitEditedGuest = function () {
         obj.plusOneInfo = plusOneInfo;
     }
 
-    var verb = "PUT"
+    var verb = "PUT";
     var onComplete = function (a, b, c) {
         console.log('success');
 
         $('.adminEditSingle').spin(false);
 
         $('.adminEditSingle').hide();
+        getList();
+
 
     }
 
     var onError = function (a, b, c) {
         console.log('failed');
+        alert('Something went wrong');
 
         $('.adminEditSingle').spin(false);
 
@@ -139,6 +141,18 @@ var submitEditedGuest = function () {
 
 };
 
+
+var showPlusOne = function () {
+    $('.plusOne').show();
+};
+
+var hidePlusOne = function() {
+    $('.plusOne').hide();
+};
+
+
+
+
 var showDataFor = function (id) {
 
     var foundElem;
@@ -160,18 +174,16 @@ var showDataFor = function (id) {
         $('#email').val(foundElem.email);
         $('#contact').val(foundElem.phoneNumber);
         $('#address').val(foundElem.address);
-        if (foundElem.statusId == 1) {
-            $("#yes").click();
-        } else {
-            $("#no").click();
-        }
-        if (foundElem.association === "bride") {
-            $('#brideAssoc').click();
-        } else if (foundElem.association === "groom") {
-            $('#groomAssoc').click();
-        } else {
-            $('#bothAssoc').click();
-        }
+
+
+        $('#attendings').val(foundElem.statusId ==1? "Yes":"No");
+
+        populateMealDropdownFromAllMeals("#menuSel");
+
+        populateMealDropdownFromAllMeals("#menuSelPlusOne");
+
+        $('#association').val(foundElem.association.capitalize());
+
 
         $('#menuSel').val(foundElem.mealId);
 
@@ -181,8 +193,9 @@ var showDataFor = function (id) {
             $('#menuSelPlusOne').val(foundElem.plusOneInfo.mealChoiceId);
             $('#plusOneName').val(foundElem.plusOneInfo.name);
             $('#plusOneId').val(foundElem.plusOneInfo.id);
+        } else {
+            $('#plusNo').click();
         }
-
 
     }
 };

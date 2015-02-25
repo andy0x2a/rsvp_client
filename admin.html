@@ -225,12 +225,13 @@
                             <div class="col-sm-9 myInput">
                                 <label for="association">Guest of:</label>
 
-                                <div class="btn-group" id="association" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>
-                                    <button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom
-                                    </button>
+                                <div class="btn-group" id="associations" role="group" aria-label="...">
+
+                                    <select class="form-control" id="association">
+                                        <option id="brideAssoc" val="bride">Bride</option>
+                                        <option id="bothAsssoc" val="both">Both</option>
+                                        <option id="groomAssoc" val="groom">Groom</option>
+                                    </select>
                                 </div>
 
                             </div>
@@ -238,12 +239,11 @@
 
                             <div class="col-sm-9 myInput">
                                 <label for="attendings">Attending:</label>
+                                <select class="form-control" id="attendings">
+                                    <option id="yes" val="yes">Yes</option>
+                                    <option id="no" val="no">No</option>
+                                </select>
 
-                                <div class="btn-group" id="attendings" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default btn-attend active" id="yes">Yes
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-attend" id="no">No</button>
-                                </div>
 
                             </div>
                             <div class="col-sm-9 myInput">
@@ -419,6 +419,23 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
 
 
         });
+
+
+
+        $("#plusYes").on('click', function (e) {
+            e.preventDefault();
+            showPlusOne();
+            $(".btn-plus").removeClass('active');
+            $("#plusYes").addClass('active');
+        });
+        $("#plusNo").on('click', function (e) {
+            e.preventDefault();
+            $(".btn-plus").removeClass('active');
+            $("#plusNo").addClass('active');
+            hidePlusOne();
+        });
+
+
 
     });
 
