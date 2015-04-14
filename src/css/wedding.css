@@ -7,7 +7,7 @@ body {
     padding-top: 50px;
 }
 .bg {
-    /*background-image: url("/src/img/bg_flowers.jpg");*/
+    background-image: url("/src/img/bg_flowers.jpg");
     height: 1000px;
     background-repeat: no-repeat;
     /*background-position: center;*/
