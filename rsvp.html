@@ -16,7 +16,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">Em and Andy</a>
+            <a class="navbar-brand" href="index.html">Jenn and Matt</a>
         </div>
     </div>
 </div>
@@ -33,19 +33,19 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
-            <div class="jumbotron">
+            <div class="">
                 <div class="container">
                     <span style="text-align: center"><h1>RSVP</h1> </span>
                 </div>
             </div>
 
-            <div id="thanks" class="jumbotron centred">
+            <div id="thanks" class="jumbotron centred hidden">
                 <span>Your RSVP Has been Received, Thank you.</span>
             </div>
-            <div id="returning" class="jumbotron centred">
+            <div id="returning" class="jumbotron centred hidden">
                 <span>You have already submitted your RSVP. Do you want to update it?</span>
 
-                <div class="showEditBtn">
+                <div class="showEditBtn ">
                     <a href="#" class="button btn btn-default" id="showEditBtn">
                         <span id="reshow"> Edit RSVP</span>
                     </a>
@@ -142,7 +142,7 @@
 
 
 
-                <div class="col-sm-9 myInput error">
+                <div class="col-sm-9 myInput error hidden">
                     <h2> Please fill out the entire form</h2>
                 </div>
 
@@ -166,7 +166,8 @@
    <script>
 
 //       var serverURL = "http://localhost:8080/";
-var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
+//var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
+var serverURL = "http://mattandjenn2015.ca/wedding/";
 
        var attendingStatus = true;
        var plusOneStatus = false;
@@ -284,9 +285,16 @@ var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
        $(document).ready(function () {
 
            $('.error').hide();
+           $('.error').removeClass('hidden');
+
            $("#thanks").hide();
+           $('#thanks').removeClass('hidden');
            $('#returning').hide();
+           $('#returning').removeClass('hidden');
+
            hidePlusOne();
+
+
 
            var result = $.cookie("com.newmansoft.rsvp.client");
             if (result) {
