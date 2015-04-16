@@ -17,16 +17,32 @@
     top:75px;
 }
 
+.headertxtmass {
+    color: black;
+    font-family: "hansHand";
+    font-size: 65px;
+    text-align: center;
+    line-height: 50px;
+    font-style: italic;
+    border-bottom: 1px;
+    margin:auto;
+    position: relative;
+    top:50px;
+}
 
 .headerwide {
-    background-image: url("/src/img/banner_lg.jpg");
+    background-image: url("/src/img/banner_lgs.jpg");
     height: 200px;
     background-repeat: no-repeat;
     /*background-position: center;*/
     background-size: cover  ;
 
 }
-
+.headerwide2 {
+    height: 200px;
+    /*opacity: .8;*/
+    /*background-color: #f2efe8;*/
+}
 #main_innerwrapper {
     width: 1001px;
     margin: 0 auto;
