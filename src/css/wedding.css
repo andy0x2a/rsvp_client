@@ -8,12 +8,14 @@ body {
 }
 .bg {
     background-image: url("/src/img/watercolor-tree_bg.jpg");
+    /*background-image: url("/src/img/bg_tree_offset.jpg");*/
     height: 1000px;
     background-repeat: no-repeat;
     /*background-position: center;*/
     background-size: cover  ;
-    margin-left: 5px;
-    margin-right:10px
+    /*margin-left: 5px;*/
+    /*margin-right:10px*/
+    /*width:1001px;*/
 }
 
 .bg2 {
@@ -21,8 +23,9 @@ body {
     height: 1000px;
     background-repeat: no-repeat;
     background-size: cover  ;
-    margin-left: 5px;
-    margin-right:10px
+    /*margin-left: 5px;*/
+    /*margin-right:10px*/
+    width:1001px;
 }
 .centred {
     display: block;
@@ -70,7 +73,8 @@ body {
         border-right: 1px solid #eee;
         opacity: 0.6;
         /*height:50%;*/
-        /*margin-left:10px;*/
+        /*margin-left: 15px;*/
+
         background-color: #f2efe8;
         width:150px;
     }

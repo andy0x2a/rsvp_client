@@ -5,7 +5,7 @@
     position: relative;
 }
 .headertxt {
-    color: rgb(147, 55, 0);
+    color: black;
     font-family: "hansHand";
     font-size: 65px;
     text-align: center;
@@ -19,7 +19,7 @@
 
 
 .headerwide {
-    background-image: url("/src/img/header_100_200px.jpg");
+    background-image: url("/src/img/banner_lg.jpg");
     height: 200px;
     background-repeat: no-repeat;
     /*background-position: center;*/
@@ -40,4 +40,12 @@
     /*color: white;*/
     font-family: "hansHand";
     /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+}
+
+.bg_image {
+    position:absolute;
+    top:200px;
+    left:150px;
+    width:750px;
+    /*z-index:0;*/
 }
