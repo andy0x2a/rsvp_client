@@ -11,33 +11,35 @@
     <link rel="stylesheet" href="src/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/lib/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="src/css/wedding.css">
+    <link rel="stylesheet" href="/src/css/mattandjen.css">
 </head>
-<body class="bg">
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">Jenn and Matt</a>
-        </div>
-    </div>
-</div>
+<body class="bg2">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+
+<div class="container3" id="main_innerwrapper">
+    <div clas="row">
+
+
+        <div class="header" id="#headercontainer">
+            <div class="headerwide " >
+                <div class="headertxt">
+                    <span>Matt and Jenn</span>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row bg">
+        <div class=" sidebar">
             <ul class="nav nav-sidebar">
                 <li class=""><a href="index.html">Home</a></li>
                 <li class="active"><a href="#">RSVP</a></li>
             </ul>
 
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class=" main hidden">
 
-
-            <div class="">
-                <div class="container">
-                    <span style="text-align: center"><h1>RSVP</h1> </span>
-                </div>
-            </div>
 
             <div id="thanks" class="jumbotron centred hidden">
                 <span>Your RSVP Has been Received, Thank you.</span>
@@ -54,7 +56,7 @@
                        <form name="signup" method="post" action="/#" id="rsvp">
 
                 <div class="col-sm-9 myInput ">
-                    <label for="firstName">First Name:</label>
+                    <!--<label for="firstName">First Name:</label>-->
                     <input id="firstName" class="Input" type="text" name="firstName" autocorrect="off" autocapitalize="off"
                            placeholder="First Name"/>
                 </div>
@@ -62,28 +64,28 @@
 
 
                 <div class="col-sm-9 myInput" >
-                    <label for="lastName">Last Name:</label>
+                    <!--<label for="lastName">Last Name:</label>-->
                     <input id="lastName" class="Input" type="text" name="lastName" autocorrect="off" autocapitalize="off"
                            placeholder="Last Name"/>
                 </div>
 
 
                 <div class="col-sm-9 myInput">
-                    <label for="contact">Phone #:</label>
+                    <!--<label for="contact">Phone #:</label>-->
                     <input id="contact" class="Input" type="text" name="contact" autocorrect="off" autocapitalize="off"
                            placeholder="Phone Number"/>
                 </div>
 
 
                 <div class="col-sm-6 myInput">
-                    <label for="address">Address:</label>
+                    <!--<label for="address">Address:</label>-->
                     <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"
                               placeholder="Address"> </textarea>
                 </div>
 
 
                 <div class="col-sm-9 myInput">
-                    <label for="email">Email:</label>
+                    <!--<label for="email">Email:</label>-->
                     <input id="email" class="Input" type="email" name="email" autocorrect="off" autocapitalize="off"
                            placeholder="Email"/>
                 </div>
@@ -116,29 +118,14 @@
 
 
                 <div class="col-sm-9 myInput">
-                    <label for="plusOne">Plus One:</label>
-                    <div class="btn-group" id="plusOne" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default btn-plus" id="plusYes">Yes</button>
-                        <button type="button" class="btn btn-default btn-plus active" id="plusNo">No</button>
-                    </div>
+                    <label for="plusOneDropdown">Number of people in your party:</label>
+                    <select class="form-control" id="plusOneDropdown">
+                        <option> 1 </option>
+                        <option> 2 </option>
+                        </select>
                 </div>
 
 
-                <div class="col-sm-9 plusOne">
-                    <div class="col-sm-9 myInput">
-                        <label for="plusOneName">Plus One Name:</label>
-                        <input id="plusOneName" class="Input" type="text" name="plusOneName" autocorrect="off" autocapitalize="off"
-                               placeholder="Name"/>
-                    </div>
-
-                    <div class="col-sm-4 myInput">
-                        <div class="form-group">
-                            <label for="menuSelPlusOne">Menu:</label>
-                            <select class="form-control" id="menuSelPlusOne">
-                            </select>
-                        </div>
-                    </div>
-                </div>
 
 
 
@@ -170,7 +157,6 @@
 var serverURL = "http://mattandjenn2015.ca/wedding/";
 
        var attendingStatus = true;
-       var plusOneStatus = false;
        var association = 'none-selected';
 
        var isEdit = false;
@@ -216,22 +202,12 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
                'address' : address,
                'statusId' : attending?'1':'0',
                'mealId' : menu,
-//               'plusOneStatus' : plusOneStatus,
                'notes': '',
                'association' :association
            };
 
 
 
-           if (plusOneStatus) {
-               var plusOneName = $('#plusOneName').val().trim();
-               var meal = $('#menuSelPlusOne option:selected').attr('id');
-               var plusOneInfo = {
-                   'name' : plusOneName,
-                   'mealChoiceId'  : meal
-               }
-               obj.plusOneInfo = plusOneInfo;
-           }
 
 
 
@@ -294,6 +270,7 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
 
            hidePlusOne();
 
+           $('.main').removeClass('hidden');
 
 
            var result = $.cookie("com.newmansoft.rsvp.client");
@@ -357,23 +334,6 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
            });
 
 
-           $("#plusYes").on('click', function (e) {
-               e.preventDefault();
-               plusOneStatus = true;
-               showPlusOne();
-               $(".btn-plus").removeClass('active');
-               $("#plusYes").addClass('active');
-           });
-
-
-
-           $("#plusNo").on('click', function (e) {
-               e.preventDefault();
-               plusOneStatus = false;
-               $(".btn-plus").removeClass('active');
-               $("#plusNo").addClass('active');
-               hidePlusOne();
-           });
 
 
            $("#brideAssoc").on('click', function (e) {
@@ -429,12 +389,7 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
 
                $('#menuSel').val( data.mealId );
 
-               if (data.plusOneInfo) {
-                   $('#plusYes').click();
-                   plusOneId = data.plusOneInfo.id;
-                   $('#menuSelPlusOne').val( data.plusOneInfo.mealChoiceId );
-                   $('#plusOneName').val(data.plusOneInfo.name);
-               }
+
 
                $("#submit").removeClass('disabled');
                   $('#rsvp').spin(false);

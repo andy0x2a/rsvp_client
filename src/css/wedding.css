@@ -4,14 +4,25 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    padding-top: 50px;
+    /*padding-top: 50px;*/
 }
 .bg {
-    background-image: url("/src/img/bg_flowers.jpg");
+    background-image: url("/src/img/watercolor-tree_bg.jpg");
     height: 1000px;
     background-repeat: no-repeat;
     /*background-position: center;*/
     background-size: cover  ;
+    margin-left: 5px;
+    margin-right:10px
+}
+
+.bg2 {
+    background-image: url("/src/img/Wedding-PC-loRes.jpg");
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: cover  ;
+    margin-left: 5px;
+    margin-right:10px
 }
 .centred {
     display: block;
@@ -46,11 +57,11 @@ body {
 
 
     .sidebar {
-        position: fixed;
-        top: 51px;
-        bottom: 0;
-        left: 0;
-        z-index: 1000;
+        position: absolute;
+        top: 200px;
+        bottom: 20px;
+        /*left: 0;*/
+        /*z-index: 1000;*/
         display: block;
         padding: 20px;
         overflow-x: hidden;
@@ -58,6 +69,10 @@ body {
         background-color:#eae4c7;
         border-right: 1px solid #eee;
         opacity: 0.6;
+        /*height:50%;*/
+        /*margin-left:10px;*/
+        background-color: #f2efe8;
+        width:150px;
     }
 
 /* Sidebar navigation */
@@ -86,6 +101,12 @@ body {
     padding: 20px;
     padding-right: 40px;
     padding-left: 40px;
+    /*background-image: url("/src/img/watercolor-tree_bg.jpg");*/
+    height: 1000px;
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+    background-size: cover  ;
+    margin-left:150px;
 
 }
 @media (min-width: 768px) {

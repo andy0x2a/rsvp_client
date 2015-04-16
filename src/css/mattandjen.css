@@ -1,0 +1,43 @@
+#headercontainer {
+    width: 1001px;
+    padding: 0;
+    float: left;
+    position: relative;
+}
+.headertxt {
+    color: rgb(147, 55, 0);
+    font-family: "hansHand";
+    font-size: 65px;
+    text-align: center;
+    line-height: 50px;
+    font-style: italic;
+    border-bottom: 1px;
+    margin:auto;
+    position: relative;
+    top:75px;
+}
+
+
+.headerwide {
+    background-image: url("/src/img/header_100_200px.jpg");
+    height: 200px;
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+    background-size: cover  ;
+
+}
+
+#main_innerwrapper {
+    width: 1001px;
+    margin: 0 auto;
+}
+
+#plusOneDropdown {
+    width: 75px;
+}
+
+.main {
+    /*color: white;*/
+    font-family: "hansHand";
+    /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+}
