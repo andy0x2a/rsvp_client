@@ -7,7 +7,7 @@ body {
     /*padding-top: 50px;*/
 }
 .bg {
-    background-image: url("/src/img/watercolor-tree_bg.jpg");
+    background-image: url("/src/img/bg_tree_fixed.jpg");
     /*background-image: url("/src/img/bg_tree_offset.jpg");*/
     height: 1000px;
     background-repeat: no-repeat;
