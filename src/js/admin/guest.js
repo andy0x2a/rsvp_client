@@ -15,13 +15,6 @@ var getListOnSuccess = function (data) {
 
     $.each(data, function (i, item) {
 
-
-        var plusOneInfoName = '';
-        var plusOneInfoMeal = '';
-        if (!!item.plusOneInfo) {
-            plusOneInfoName = item.plusOneInfo.name;
-            plusOneInfoMeal = getMealName(item.plusOneInfo.mealChoiceId);
-        }
         var rowStr = '<tr>' +
 
             '<td>' + item.id + '</td>' +
@@ -34,8 +27,7 @@ var getListOnSuccess = function (data) {
             '<td>' + item.address + '</td>' +
             '<td>' + item.association + '</td>' +
             '<td>' + item.notes + '</td>' +
-            '<td>' + plusOneInfoName + '</td>' +
-            '<td>' + plusOneInfoMeal + '</td>' +
+            '<td>' + item.partySize + '</td>' +
             '<td> <a href="#" class="editIcon" id="edit_icon_' + item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
             '</row>';
 
@@ -72,7 +64,7 @@ var submitEditedGuest = function () {
     var contact = $('#contact').val().trim();
     var address = $('#address').val().trim();
     var menu = $('#menuSel option:selected').attr('id');
-    var plusOneStatus = $("#plusYes").hasClass('active');
+    var partySize = $("#partySize ").val().trim();
     var association =$('#association option:selected').attr('val').toLowerCase();
     var attending = true;
     if  ($('#attendings option:selected').attr('id').toLowerCase() == 'no') {
@@ -89,20 +81,12 @@ var submitEditedGuest = function () {
         'mealId': menu,
         'notes': '',
         'association': association,
+        'partySize' : partySize,
         'id': id
     };
 
 
-    if (plusOneStatus) {
-        var plusOneName = $('#plusOneName').val().trim();
-        var meal = $('#menuSelPlusOne option:selected').attr('id');
-        var plusOneInfo = {
-            'name': plusOneName,
-            'mealChoiceId': meal,
-            'id':  $('#plusOneId').val().trim()
-        }
-        obj.plusOneInfo = plusOneInfo;
-    }
+
 
     var verb = "PUT";
     var onComplete = function (a, b, c) {
@@ -142,13 +126,6 @@ var submitEditedGuest = function () {
 };
 
 
-var showPlusOne = function () {
-    $('.plusOne').show();
-};
-
-var hidePlusOne = function() {
-    $('.plusOne').hide();
-};
 
 
 
@@ -180,22 +157,12 @@ var showDataFor = function (id) {
 
         populateMealDropdownFromAllMeals("#menuSel");
 
-        populateMealDropdownFromAllMeals("#menuSelPlusOne");
 
         $('#association').val(foundElem.association.capitalize());
 
 
         $('#menuSel').val(foundElem.mealId);
-
-        if (foundElem.plusOneInfo) {
-            $('#plusYes').click();
-            plusOneId = foundElem.plusOneInfo.id;
-            $('#menuSelPlusOne').val(foundElem.plusOneInfo.mealChoiceId);
-            $('#plusOneName').val(foundElem.plusOneInfo.name);
-            $('#plusOneId').val(foundElem.plusOneInfo.id);
-        } else {
-            $('#plusNo').click();
-        }
+            $('#partySize').val(foundElem.partySize);
 
     }
 };

@@ -117,8 +117,8 @@
 
 
                 <div class="col-sm-9 myInput">
-                    <label for="plusOneDropdown">Number of people in your party:</label>
-                    <select class="form-control" id="plusOneDropdown">
+                    <label for="partySize">Number of people in your party:</label>
+                    <select class="form-control" id="partySize">
                         <option> 1 </option>
                         <option> 2 </option>
                         </select>
@@ -182,7 +182,7 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
            var address = $('#address').val().trim();
            var attending = attendingStatus;
            var menu = $('#menuSel option:selected').attr('id');
-
+            var partySize = $('#partySize option:selected').val().trim();
 
 
 
@@ -202,7 +202,8 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
                'statusId' : attending?'1':'0',
                'mealId' : menu,
                'notes': '',
-               'association' :association
+               'association' :association,
+               'partySize' : partySize
            };
 
 
@@ -387,7 +388,7 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
                }
 
                $('#menuSel').val( data.mealId );
-
+               $('#partySize').val( data.partySize );
 
 
                $("#submit").removeClass('disabled');

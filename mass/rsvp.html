@@ -117,8 +117,8 @@
 
 
                 <div class="col-sm-9 myInput">
-                    <label for="plusOneDropdown">Number of people in your party:</label>
-                    <select class="form-control" id="plusOneDropdown">
+                    <label for="partySize">Number of people in your party:</label>
+                    <select class="form-control" id="partySize">
                         <option> 1 </option>
                         <option> 2 </option>
                         </select>
@@ -162,13 +162,6 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
        var id;
        var plusOneId;
 
-       var showPlusOne = function () {
-        $('.plusOne').show();
-       };
-
-       var hidePlusOne = function() {
-           $('.plusOne').hide();
-       };
 
        var processForm = function () {
 
@@ -202,7 +195,8 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
                'statusId' : attending?'1':'0',
                'mealId' : menu,
                'notes': '',
-               'association' :association
+               'association' :association,
+               'partySize': partySize
            };
 
 
