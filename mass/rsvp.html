@@ -31,14 +31,8 @@
 
     </div>
     <div class="bg22">
-        <div class=" sidebar">
-            <ul class="nav nav-sidebar">
-                <li class=""><a href="index.html">Home</a></li>
-                <li class="active"><a href="#">RSVP</a></li>
-            </ul>
 
-        </div>
-        <div class=" bg main hidden">
+        <div class=" bg22 main hidden">
 
             <div id="thanks" class="jumbotron centred hidden">
                 <span>Your RSVP Has been Received, Thank you.</span>
@@ -52,7 +46,7 @@
                     </a>
                 </div>
             </div>
-                       <form name="signup" method="post" action="/#" id="rsvp">
+            <form name="signup" method="post" action="/#" id="rsvp">
 
                 <div class="col-sm-9 myInput ">
                     <label for="firstName">First Name:</label>
@@ -121,7 +115,7 @@
                     <select class="form-control" id="partySize">
                         <option> 1 </option>
                         <option> 2 </option>
-                        </select>
+                    </select>
                 </div>
 
 
@@ -149,276 +143,287 @@
 <script src="/src/js/vendor/spin.js"></script>
 
 <script src="/src/js/vendor/jquery.spin.js"></script>
-   <script>
+<script>
 
-//       var serverURL = "http://localhost:8080/";
-//var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
-var serverURL = "http://mattandjenn2015.ca/wedding/";
+    var weddingLocation = 'MASS';
+    var cookieLocation = "com.newmansoft.rsvp.client" + weddingLocation;
 
-       var attendingStatus = true;
-       var association = 'none-selected';
+    //       var serverURL = "http://localhost:8080/";
+    //var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
+    var serverURL = "http://mattandjenn2015.ca/wedding/";
 
-       var isEdit = false;
-       var id;
-       var plusOneId;
+    var attendingStatus = true;
+    var association = 'none-selected';
 
+    var isEdit = false;
+    var id;
+    var plusOneId;
 
-       var processForm = function () {
+    var showPlusOne = function () {
+        $('.plusOne').show();
+    };
 
+    var hidePlusOne = function() {
+        $('.plusOne').hide();
+    };
 
-           $('.error').hide();
-
-           var firstName = $('#firstName').val().trim();
-           var lastName = $('#lastName').val().trim();
-           var email = $('#email').val().trim();
-           var contact = $('#contact').val().trim();
-           var address = $('#address').val().trim();
-           var attending = attendingStatus;
-           var menu = $('#menuSel option:selected').attr('id');
-
+    var processForm = function () {
 
 
+        $('.error').hide();
 
-           var isValid = true;
+        var firstName = $('#firstName').val().trim();
+        var lastName = $('#lastName').val().trim();
+        var email = $('#email').val().trim();
+        var contact = $('#contact').val().trim();
+        var address = $('#address').val().trim();
+        var attending = attendingStatus;
+        var menu = $('#menuSel option:selected').attr('id');
+        var partySize = $('#partySize option:selected').val().trim();
 
-           isValid = firstName && lastName && email && contact && address && menu;
 
 
+        var isValid = true;
 
-
-           var obj = {
-                'firstName' : firstName,
-               'lastName': lastName,
-               'email' : email,
-               'phoneNumber' : contact,
-               'address' : address,
-               'statusId' : attending?'1':'0',
-               'mealId' : menu,
-               'notes': '',
-               'association' :association,
-               'partySize': partySize
-           };
+        isValid = firstName && lastName && email && contact && address && menu;
 
 
 
 
+        var obj = {
+            'firstName' : firstName,
+            'lastName': lastName,
+            'email' : email,
+            'phoneNumber' : contact,
+            'address' : address,
+            'statusId' : attending?'1':'0',
+            'mealId' : menu,
+            'notes': weddingLocation,
+            'association' :association,
+            'partySize' : partySize
+        };
 
 
-           var onComplete = function(a,b,c) {
-               console.log('success');
-               $.cookie("com.newmansoft.rsvp.client",a.id);
-               id = a.id;
-               $("#submit").addClass('disabled');
-                  $('#rsvp').spin(false);
-               $('#rsvp').hide();
-               $('#returning').hide();
-               $('#thanks').show();
-
-           }
-
-           var onError = function(a,b,c) {
-               console.log('failed');
-                  $('#rsvp').spin(false);
-           }
-           if (isValid) {
-               console.log('submitting');
-               var verb = "POST";
-               var url = serverURL + "guest/";
-               if (isEdit) {
-                   obj.id = id;
-                   verb = "PUT";
-                   url = url + id;
-                   if(obj.plusOneInfo && plusOneId) {
-                    
-                   obj.plusOneInfo.id = plusOneId;
-                   }
-               }
-               $.ajax( {
-                   url: url,
-                   type: verb,
-                   data: JSON.stringify(obj),
-                   dataType:"json",
-                   contentType: 'application/json',
-                   success: onComplete,
-                   error:onError
-               })
-           } else {
-               $('.error').show();
-                  $('#rsvp').spin(false);
-           }
-           console.log(JSON.stringify(obj));
 
 
-       };
-
-       $(document).ready(function () {
-
-           $('.error').hide();
-           $('.error').removeClass('hidden');
-
-           $("#thanks").hide();
-           $('#thanks').removeClass('hidden');
-           $('#returning').hide();
-           $('#returning').removeClass('hidden');
-
-           hidePlusOne();
-
-           $('.main').removeClass('hidden');
 
 
-           var result = $.cookie("com.newmansoft.rsvp.client");
-            if (result) {
-                console.log('found  ' + result);
-                $("#submit").addClass('disabled');
-                $('#rsvp').hide();
-                $('#returning').show();
-                id = result;
+        var onComplete = function(a,b,c) {
+            console.log('success');
+            $.cookie(cookieLocation,a.id);
+            id = a.id;
+            $("#submit").addClass('disabled');
+            $('#rsvp').spin(false);
+            $('#rsvp').hide();
+            $('#returning').hide();
+            $('#thanks').show();
+
+        }
+
+        var onError = function(a,b,c) {
+            console.log('failed');
+            $('#rsvp').spin(false);
+        }
+        if (isValid) {
+            console.log('submitting');
+            var verb = "POST";
+            var url = serverURL + "guest/";
+            if (isEdit) {
+                obj.id = id;
+                verb = "PUT";
+                url = url + id;
+                if(obj.plusOneInfo && plusOneId) {
+
+                    obj.plusOneInfo.id = plusOneId;
+                }
+            }
+            $.ajax( {
+                url: url,
+                type: verb,
+                data: JSON.stringify(obj),
+                dataType:"json",
+                contentType: 'application/json',
+                success: onComplete,
+                error:onError
+            })
+        } else {
+            $('.error').show();
+            $('#rsvp').spin(false);
+        }
+        console.log(JSON.stringify(obj));
+
+
+    };
+
+    $(document).ready(function () {
+
+        $('.error').hide();
+        $('.error').removeClass('hidden');
+
+        $("#thanks").hide();
+        $('#thanks').removeClass('hidden');
+        $('#returning').hide();
+        $('#returning').removeClass('hidden');
+
+        hidePlusOne();
+
+        $('.main').removeClass('hidden');
+
+
+        var result = $.cookie(cookieLocation);
+        if (result) {
+            console.log('found  ' + result);
+            $("#submit").addClass('disabled');
+            $('#rsvp').hide();
+            $('#returning').show();
+            id = result;
+
+        }
+
+
+        var mealOnComplete = function (data){
+            for(var i = 0; i < data.length; i++) {
+                var obj = data[i];
+
+                $("#menuSel")
+                        .append($("<option></option>")
+                                .attr("value",obj.id)
+                                .attr("id",obj.id)
+                                .text(obj.name));
+                $("#menuSelPlusOne")
+                        .append($("<option></option>")
+                                .attr("value",obj.id)
+                                .attr("id",obj.id)
+                                .text(obj.name));
+
 
             }
+        };
 
+        var mealOnError = function() {
 
-           var mealOnComplete = function (data){
-               for(var i = 0; i < data.length; i++) {
-                   var obj = data[i];
-
-                   $("#menuSel")
-               .append($("<option></option>")
-                           .attr("value",obj.id)
-                                   .attr("id",obj.id)
-                           .text(obj.name));
-                   $("#menuSelPlusOne")
-                           .append($("<option></option>")
-                                   .attr("value",obj.id)
-                                   .attr("id",obj.id)
-                                   .text(obj.name));
-
-
-               }
-           };
-
-           var mealOnError = function() {
-
-           }
-           $.ajax( {
-               url: serverURL + "meal/",
-               type: "GET",
-               dataType:"json",
-               contentType: 'application/json',
-               success: mealOnComplete,
-               error:mealOnError
-           })
+        }
+        $.ajax( {
+            url: serverURL + "meal/",
+            type: "GET",
+            dataType:"json",
+            contentType: 'application/json',
+            success: mealOnComplete,
+            error:mealOnError
+        })
 
 
 
-           $("#yes").on('click', function (e) {
-               e.preventDefault();
-               attendingStatus = true;
-               $(".btn-attend").removeClass('active');
-               $("#yes").addClass('active');
-           });
+        $("#yes").on('click', function (e) {
+            e.preventDefault();
+            attendingStatus = true;
+            $(".btn-attend").removeClass('active');
+            $("#yes").addClass('active');
+        });
 
 
 
-           $("#no").on('click', function (e) {
-               e.preventDefault();
-               attendingStatus = false;
-               $(".btn-attend").removeClass('active');
-               $("#no").addClass('active');
-           });
+        $("#no").on('click', function (e) {
+            e.preventDefault();
+            attendingStatus = false;
+            $(".btn-attend").removeClass('active');
+            $("#no").addClass('active');
+        });
 
 
 
 
-           $("#brideAssoc").on('click', function (e) {
-               e.preventDefault();
-               association = 'bride';
-               $(".btn-assoc").removeClass('active');
-               $("#brideAssoc").addClass('active');
-           });
-           $("#bothAssoc").on('click', function (e) {
-               e.preventDefault();
-               association = 'both';
-               $(".btn-assoc").removeClass('active');
-               $("#bothAssoc").addClass('active');
-           });
-           $("#groomAssoc").on('click', function (e) {
-               e.preventDefault();
-               association = 'groom';
-               $(".btn-assoc").removeClass('active');
-               $("#groomAssoc").addClass('active');
-           });
+        $("#brideAssoc").on('click', function (e) {
+            e.preventDefault();
+            association = 'bride';
+            $(".btn-assoc").removeClass('active');
+            $("#brideAssoc").addClass('active');
+        });
+        $("#bothAssoc").on('click', function (e) {
+            e.preventDefault();
+            association = 'both';
+            $(".btn-assoc").removeClass('active');
+            $("#bothAssoc").addClass('active');
+        });
+        $("#groomAssoc").on('click', function (e) {
+            e.preventDefault();
+            association = 'groom';
+            $(".btn-assoc").removeClass('active');
+            $("#groomAssoc").addClass('active');
+        });
 
 
 
-           $("#submit").on('click', function (e) {
-               e.preventDefault();
-                $('#rsvp').spin();
-              processForm();
-           });
+        $("#submit").on('click', function (e) {
+            e.preventDefault();
+            $('#rsvp').spin();
+            processForm();
+        });
 
 
-           var getOnSuccess = function (data) {
+        var getOnSuccess = function (data) {
 
 
-               console.log('need to fill out variables here');
+            console.log('need to fill out variables here');
 
-                $('#firstName').val(data.firstName);
-               $('#lastName').val(data.lastName);
-               $('#email').val(data.email);
-               $('#contact').val(data.phoneNumber);
-               $('#address').val(data.address);
-               if (data.statusId  == 1) {
-                   $("#yes").click();
-               } else {
-                   $("#no").click();
-               }
-               if (data.association ==="bride") {
-                   $('#brideAssoc').click();
-               } else if (data.association === "groom") {
-                   $('#groomAssoc').click();
-               } else {
-                   $('#bothAssoc').click();
-               }
+            $('#firstName').val(data.firstName);
+            $('#lastName').val(data.lastName);
+            $('#email').val(data.email);
+            $('#contact').val(data.phoneNumber);
+            $('#address').val(data.address);
 
-               $('#menuSel').val( data.mealId );
+            if (data.statusId  == 1) {
+                $("#yes").click();
+            } else {
+                $("#no").click();
+            }
+            if (data.association ==="bride") {
+                $('#brideAssoc').click();
+            } else if (data.association === "groom") {
+                $('#groomAssoc').click();
+            } else {
+                $('#bothAssoc').click();
+            }
+
+            $('#menuSel').val( data.mealId );
+            $('#partySize').val( data.partySize );
 
 
+            $("#submit").removeClass('disabled');
+            $('#rsvp').spin(false);
 
-               $("#submit").removeClass('disabled');
-                  $('#rsvp').spin(false);
+        };
 
-           };
+        var getOnError = function (e) {
 
-           var getOnError = function (e) {
+            alert('something went wrong retrieving the RSVP info');
+            $('#rsvp').spin(false);
+        };
 
-               alert('something went wrong retrieving the RSVP info');
-                  $('#rsvp').spin(false);
-           };
+        $('#showEditBtn').on('click', function(e) {
+            //show form for edit
+            e.preventDefault();
+            $('#rsvp').show();
+            $('#rsvp').spin();
 
-           $('#showEditBtn').on('click', function(e) {
-               //show form for edit
-               e.preventDefault();
-               $('#rsvp').show();
-                  $('#rsvp').spin();
+            $.ajax( {
+                url: serverURL + "guest/" + id,
+                type: "GET",
+                dataType:"json",
+                contentType: 'application/json',
+                success: getOnSuccess,
+                error:getOnError
+            });
 
-               $.ajax( {
-                   url: serverURL + "guest/" + id,
-                   type: "GET",
-                   dataType:"json",
-                   contentType: 'application/json',
-                   success: getOnSuccess,
-                   error:getOnError
-               });
+            $("#submit").text('Submit Changes');
+            isEdit = true;
 
-               $("#submit").text('Submit Changes');
-               isEdit = true;
+        });
 
-           });
-           
-       });
-       
-       
-   </script>
+    });
+
+
+</script>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

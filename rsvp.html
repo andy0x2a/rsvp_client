@@ -151,6 +151,9 @@
 <script src="/src/js/vendor/jquery.spin.js"></script>
    <script>
 
+       var weddingLocation = 'VAN';
+       var cookieLocation = "com.newmansoft.rsvp.client" + weddingLocation;
+
 //       var serverURL = "http://localhost:8080/";
 //var serverURL = "http://andybackend-newmansoft.rhcloud.com/rsvp/";
 var serverURL = "http://mattandjenn2015.ca/wedding/";
@@ -201,7 +204,7 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
                'address' : address,
                'statusId' : attending?'1':'0',
                'mealId' : menu,
-               'notes': '',
+               'notes': weddingLocation,
                'association' :association,
                'partySize' : partySize
            };
@@ -213,7 +216,7 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
 
            var onComplete = function(a,b,c) {
                console.log('success');
-               $.cookie("com.newmansoft.rsvp.client",a.id);
+               $.cookie(cookieLocation,a.id);
                id = a.id;
                $("#submit").addClass('disabled');
                   $('#rsvp').spin(false);
@@ -273,7 +276,7 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
            $('.main').removeClass('hidden');
 
 
-           var result = $.cookie("com.newmansoft.rsvp.client");
+           var result = $.cookie(cookieLocation);
             if (result) {
                 console.log('found  ' + result);
                 $("#submit").addClass('disabled');
