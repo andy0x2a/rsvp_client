@@ -7,7 +7,7 @@ body {
     /*padding-top: 50px;*/
 }
 .bg {
-    background-image: url("/src/img/bg_tree_fixed.jpg");
+    /*background-image: url("/src/img/bg_tree_fixed.jpg");*/
     /*background-image: url("/src/img/bg_tree_offset.jpg");*/
     height: 1000px;
     background-repeat: no-repeat;
@@ -19,7 +19,7 @@ body {
 }
 
 .bg2 {
-    background-image: url("/src/img/Wedding-PC-loRes.jpg");
+    /*background-image: url("/src/img/Wedding-PC-loRes.jpg");*/
     height: 1000px;
     background-repeat: no-repeat;
     background-size: cover  ;
@@ -33,7 +33,8 @@ body {
     margin-right: auto;
     text-align: center;
 }
-}
+
+
 
 .hidden {
     display:none;
@@ -61,7 +62,7 @@ body {
 
     .sidebar {
         position: absolute;
-        top: 200px;
+        top: 0px;
         bottom: 20px;
         /*left: 0;*/
         /*z-index: 1000;*/
@@ -81,6 +82,7 @@ body {
 
 /* Sidebar navigation */
 .nav-sidebar {
+    margin-top:200px;
     margin-right: -21px; /* 20px padding + 1px border */
     margin-bottom: 20px;
     margin-left: -20px;
@@ -111,6 +113,7 @@ body {
     /*background-position: center;*/
     background-size: cover  ;
     margin-left:150px;
+    font-size:17px;
 
 }
 @media (min-width: 768px) {

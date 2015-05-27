@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Matt & Jenn in Massachusetts</title>
     <meta name="description" content="RSVP">
     <meta name="keywords" content="wedding matt jen vancouver">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,10 +13,19 @@
     <link rel="stylesheet" href="/src/css/wedding.css">
     <link rel="stylesheet" href="/src/css/mattandjen.css">
 </head>
-<body class="bg22">
+<body class="fbg">
 
 
-<div class="container3" id="main_innerwrapper">
+<div class="bg" id="main_innerwrapper">
+    <div class=" sidebar">
+        <ul class="nav nav-sidebar">
+            <li class=""><a href="index.html">Home</a></li>
+            <li class="active"><a href="#">RSVP</a></li>
+            <li class=""><a href="photos.html">Photos</a></li>
+
+        </ul>
+
+    </div>
     <div clas="row">
 
 
@@ -101,21 +110,24 @@
                     </div>
 
                 </div>
-                <div class="col-sm-4 myInput">
-                    <div class="form-group">
-                        <label for="menuSel">Menu:</label>
-                        <select class="form-control" id="menuSel">
-                        </select>
-                    </div>
-                </div>
+                <!--<div class="col-sm-4 myInput">-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="menuSel">Menu:</label>-->
+                        <!--<select class="form-control" id="menuSel">-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
 
 
                 <div class="col-sm-9 myInput">
                     <label for="partySize">Number of people in your party:</label>
-                    <select class="form-control" id="partySize">
-                        <option> 1 </option>
-                        <option> 2 </option>
-                    </select>
+                    <div class="col-sm-4">
+
+                        <select class="form-control col-sm-4" id="partySize">
+                            <option> 1 </option>
+                            <option> 2 </option>
+                        </select>
+                    </div>
                 </div>
 
 
@@ -178,14 +190,15 @@
         var contact = $('#contact').val().trim();
         var address = $('#address').val().trim();
         var attending = attendingStatus;
-        var menu = $('#menuSel option:selected').attr('id');
+//        var menu = $('#menuSel option:selected').attr('id');
+        var menu = 5;
         var partySize = $('#partySize option:selected').val().trim();
 
 
 
         var isValid = true;
 
-        isValid = firstName && lastName && email && contact && address && menu;
+        isValid = firstName && lastName && email && contact && address ;
 
 
 
@@ -303,14 +316,14 @@
         var mealOnError = function() {
 
         }
-        $.ajax( {
-            url: serverURL + "meal/",
-            type: "GET",
-            dataType:"json",
-            contentType: 'application/json',
-            success: mealOnComplete,
-            error:mealOnError
-        })
+//        $.ajax( {
+//            url: serverURL + "meal/",
+//            type: "GET",
+//            dataType:"json",
+//            contentType: 'application/json',
+//            success: mealOnComplete,
+//            error:mealOnError
+//        })
 
 
 
@@ -371,7 +384,6 @@
             $('#email').val(data.email);
             $('#contact').val(data.phoneNumber);
             $('#address').val(data.address);
-
             if (data.statusId  == 1) {
                 $("#yes").click();
             } else {
