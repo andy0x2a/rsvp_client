@@ -77,3 +77,11 @@
     /*background-position: center;*/
     background-size: cover ;
 }
+.fbg_invit {
+    background-image: url("/src/img/2000.png");
+    /*height: 1100px;*/
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+    background-size: contain;
+    margin-top:-200px;
+}

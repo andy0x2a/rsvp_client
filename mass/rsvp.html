@@ -79,11 +79,11 @@
                 </div>
 
 
-                <div class="col-sm-6 myInput">
-                    <label for="address">Address:</label>
-                    <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"
-                              placeholder="Address"> </textarea>
-                </div>
+                <!--<div class="col-sm-6 myInput">-->
+                    <!--<label for="address">Address:</label>-->
+                    <!--<textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"-->
+                              <!--placeholder="Address"> </textarea>-->
+                <!--</div>-->
 
 
                 <div class="col-sm-9 myInput">
@@ -91,15 +91,15 @@
                     <input id="email" class="Input" type="email" name="email" autocorrect="off" autocapitalize="off"
                            placeholder="Email"/>
                 </div>
-                <div class="col-sm-9 myInput">
-                    <label for="association">Guest of:</label>
-                    <div class="btn-group" id="association" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride</button>
-                        <button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>
-                        <button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom</button>
-                    </div>
+                <!--<div class="col-sm-9 myInput">-->
+                    <!--<label for="association">Guest of:</label>-->
+                    <!--<div class="btn-group" id="association" role="group" aria-label="...">-->
+                        <!--<button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride</button>-->
+                        <!--<button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>-->
+                        <!--<button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom</button>-->
+                    <!--</div>-->
 
-                </div>
+                <!--</div>-->
 
 
                 <div class="col-sm-9 myInput">
@@ -188,7 +188,8 @@
         var lastName = $('#lastName').val().trim();
         var email = $('#email').val().trim();
         var contact = $('#contact').val().trim();
-        var address = $('#address').val().trim();
+//        var address = $('#address').val().trim();
+        var address =null;
         var attending = attendingStatus;
 //        var menu = $('#menuSel option:selected').attr('id');
         var menu = 5;
@@ -198,7 +199,7 @@
 
         var isValid = true;
 
-        isValid = firstName && lastName && email && contact && address ;
+        isValid = firstName && lastName && email && contact ;
 
 
 
