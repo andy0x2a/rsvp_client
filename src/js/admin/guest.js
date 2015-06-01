@@ -45,7 +45,7 @@ var getListOnSuccess = function (data) {
 
         var id = $(event.target).parent('a').attr('id').substring(10);
         showDataFor(id);
-
+        $("#submitEdit").unbind();
         $("#submitEdit").on('click', submitEditedGuest);
 
     });
@@ -65,7 +65,9 @@ var submitEditedGuest = function () {
     var address = $('#address').val().trim();
     var menu = $('#menuSel option:selected').attr('id');
     var partySize = $("#partySize ").val().trim();
-    var association =$('#association option:selected').attr('val').toLowerCase();
+    var notes = $("#notes").val().trim();
+    //var association =$('#association option:selected').attr('val').toLowerCase();
+    var association = null;
     var attending = true;
     if  ($('#attendings option:selected').attr('id').toLowerCase() == 'no') {
         attending = false;
@@ -79,7 +81,7 @@ var submitEditedGuest = function () {
         'address': address,
         'statusId': attending ? '1' : '0',
         'mealId': menu,
-        'notes': '',
+        'notes': notes,
         'association': association,
         'partySize' : partySize,
         'id': id
@@ -158,16 +160,18 @@ var showDataFor = function (id) {
         populateMealDropdownFromAllMeals("#menuSel");
 
 
-        $('#association').val(foundElem.association.capitalize());
+        //$('#association').val((!!foundElem.association)? foundElem.association.capitalize(): null);
 
 
         $('#menuSel').val(foundElem.mealId);
-            $('#partySize').val(foundElem.partySize);
+        $('#partySize').val(foundElem.partySize);
+        $('#notes').val(foundElem.notes);
 
     }
 };
 var getList = function () {
     $(".adminConsole").show();
-     $('.adminConsole').spin();
+    $('.adminConsole').spin();
+    console.log('here');
     adminCallAjax(serverURL + "admin/guests", "GET", null, getListOnSuccess, getListOnError);
 };
