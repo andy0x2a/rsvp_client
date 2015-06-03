@@ -10,7 +10,7 @@
 
 .salmon {
     /*background-color: #f2efe8;*/
-    background-color:rgba(242,239,232,0.5);
+    background-color:rgba(242,239,232,0.7);
 
     border-radius: 10px;
     border-style: solid;
@@ -37,13 +37,21 @@
 
 }
 .salmonsmall {
-    width:400px;
+    width:600px;
     min-height: 200px;
     padding: 10px;
+    margin-left: 0;
+    margin-right: auto;
+    margin-top: auto;
+    padding:40px;
 
 }
 .salmonbase.salmonsmall {
-    margin-left: 12%;
+    /*margin-left: 12%;*/
+}
+
+.lowerit {
+    margin-top: 25px;
 }
 label {
     margin-right: 20px;

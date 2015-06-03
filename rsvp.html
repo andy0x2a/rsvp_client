@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Matt & Jenn in Massachusetts</title>
     <meta name="description" content="RSVP">
     <meta name="keywords" content="wedding matt jen vancouver">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="/src/lib/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/src/css/wedding.css">
     <link rel="stylesheet" href="/src/css/mattandjen.css">
+    <link rel="stylesheet" href="/src/css/mass.css">
+
 </head>
-<body class="fbg">
+<body class="">
 
 
 <div class="bg" id="main_innerwrapper">
@@ -28,19 +30,20 @@
     </div>
     <div clas="row">
 
+
+    </div>
+    <div class="fbg_alt">
+
         <div class="header" id="#headercontainer">
-            <div class="headerwide2 " >
-                <div class="headertxt">
-                    <span>Matt and Jenn</span>
+            <div class="headerwide ">
+                <div class="headertxtmass">
+                    <span>Matt and Jenn </span>
 
                 </div>
             </div>
         </div>
 
-    </div>
-    <div class="bg22">
-
-        <div class=" bg22 main hidden">
+        <div class="  main hidden">
 
             <div id="thanks" class="jumbotron centred hidden">
                 <span>Your RSVP Has been Received, Thank you.</span>
@@ -54,97 +57,129 @@
                     </a>
                 </div>
             </div>
-                       <form name="signup" method="post" action="/#" id="rsvp">
-
-                <div class="col-sm-9 myInput ">
-                    <label for="firstName">First Name:</label>
-                    <input id="firstName" class="Input" type="text" name="firstName" autocorrect="off" autocapitalize="off"
-                           placeholder="First Name"/>
-                </div>
 
 
-
-                <div class="col-sm-9 myInput" >
-                    <label for="lastName">Last Name:</label>
-                    <input id="lastName" class="Input" type="text" name="lastName" autocorrect="off" autocapitalize="off"
-                           placeholder="Last Name"/>
-                </div>
-
-
-                <div class="col-sm-9 myInput">
-                    <label for="contact">Phone #:</label>
-                    <input id="contact" class="Input" type="text" name="contact" autocorrect="off" autocapitalize="off"
-                           placeholder="Phone Number"/>
-                </div>
-
-
-                <div class="col-sm-6 myInput">
-                    <label for="address">Address:</label>
-                    <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"
-                              placeholder="Address"> </textarea>
-                </div>
-
-
-                <div class="col-sm-9 myInput">
-                    <label for="email">Email:</label>
-                    <input id="email" class="Input" type="email" name="email" autocorrect="off" autocapitalize="off"
-                           placeholder="Email"/>
-                </div>
-                <div class="col-sm-9 myInput">
-                    <label for="association">Guest of:</label>
-                    <div class="btn-group" id="association" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride</button>
-                        <button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>
-                        <button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom</button>
+            <form name="signup" method="post" action="/#" id="rsvp">
+                <div class=" salmon">
+                    <div class="col-sm-9 myInput ">
+                        <label for="firstName">First Name:</label>
+                        <input id="firstName" class="Input" type="text" name="firstName" autocorrect="off"
+                               autocapitalize="off"
+                               placeholder="First Name"/>
                     </div>
 
-                </div>
 
-
-                <div class="col-sm-9 myInput">
-                    <label for="attendings">Attending:</label>
-                    <div class="btn-group" id="attendings" role="group" aria-label="...">
-                        <button type="button" class="btn btn-default btn-attend active" id="yes">Yes</button>
-                        <button type="button" class="btn btn-default btn-attend" id="no">No</button>
+                    <div class="col-sm-9 myInput">
+                        <label for="lastName">Last Name:</label>
+                        <input id="lastName" class="Input" type="text" name="lastName" autocorrect="off"
+                               autocapitalize="off"
+                               placeholder="Last Name"/>
                     </div>
 
-                </div>
-                <div class="col-sm-4 myInput">
-                    <div class="form-group">
-                        <label for="menuSel">Menu:</label>
-                        <select class="form-control" id="menuSel">
-                        </select>
+
+                    <div class="col-sm-9 myInput">
+                        <label for="contact">Phone #:</label>
+                        <input id="contact" class="Input" type="text" name="contact" autocorrect="off"
+                               autocapitalize="off"
+                               placeholder="Phone Number"/>
                     </div>
-                </div>
 
 
-                <div class="col-sm-9 myInput">
-                    <label for="partySize">Number of people in your party:</label>
-                    <div class="col-sm-4">
+                    <!--<div class="col-sm-6 myInput">-->
+                    <!--<label for="address">Address:</label>-->
+                    <!--<textarea id="address" class="form-control" rows="3" name="address" autocorrect="off" autocapitalize="off"-->
+                    <!--placeholder="Address"> </textarea>-->
+                    <!--</div>-->
 
-                        <select class="form-control col-sm-4" id="partySize">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                        </select>
+
+                    <div class="col-sm-9 myInput">
+                        <label for="email">Email:</label>
+                        <input id="email" class="Input" type="email" name="email" autocorrect="off" autocapitalize="off"
+                               placeholder="Email"/>
                     </div>
-                </div>
+                    <!--<div class="col-sm-9 myInput">-->
+                    <!--<label for="association">Guest of:</label>-->
+                    <!--<div class="btn-group" id="association" role="group" aria-label="...">-->
+                    <!--<button type="button" class="btn btn-default btn-assoc " id="brideAssoc">Bride</button>-->
+                    <!--<button type="button" class="btn btn-default btn-assoc" id="bothAssoc">Both</button>-->
+                    <!--<button type="button" class="btn btn-default btn-assoc" id="groomAssoc">Groom</button>-->
+                    <!--</div>-->
+
+                    <!--</div>-->
 
 
+                    <div class="col-sm-9 myInput">
+                        <label for="attendings">Attending:</label>
+
+                        <div class="btn-group" id="attendings" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default btn-attend active" id="yes">Yes</button>
+                            <button type="button" class="btn btn-default btn-attend" id="no">No</button>
+                        </div>
+
+                    </div>
+                    <!--<div class="col-sm-4 myInput">-->
+                    <!--<div class="form-group">-->
+                    <!--<label for="menuSel">Menu:</label>-->
+                    <!--<select class="form-control" id="menuSel">-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--</div>-->
 
 
+                    <div class="col-sm-9 myInput partyDiv">
+                        <label for="partySize">Number of people in your party:</label>
 
-                <div class="col-sm-9 myInput error hidden">
-                    <h2> Please fill out the entire form</h2>
-                </div>
+                        <div class="col-sm-4 partyForm">
 
-                <div class="col-sm-9 myInput">
-                    <a href="#" class="button btn btn-default" id="submit">
-                        <span id="button_submit_text">   Submit</span>
-                    </a>
+                            <select class="form-control col-sm-4" id="partySize">
+                                <option> 1</option>
+                                <option> 2</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-9 myInput error hidden">
+                        <h2> Please fill out the entire form</h2>
+                    </div>
+
+                    <div class="col-sm-9 myInput buttonForm">
+                        <a href="#" class="button btn btn-default" id="submit">
+                            <span id="button_submit_text">   Submit</span>
+                        </a>
+                    </div>
                 </div>
             </form>
+            <div class="salmonbase salmonsmall lowerit">
+                <!--<div class="salmon lowerit">-->
+                <p>
+                    Our Vancouver home is so very small and already pretty well equipped. So, in lieu of house or personal gifts,
+                    we would truly appreciate your help creating priceless memories during our honeymoon in Europe next summer.
+                    Any contribution toward that adventure is greatly appreciated.
+
+                </p>
+                <p class="centred">
+                    Thanks in advance and with much love,
+                    <br>
+                    <strong>Matt & Jenn</strong>
+                </p>
+
+
+                <div class="centred">
+                    <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=mattwallacedesigner@gmail.com"
+                            data-button="donate"
+                            data-name="European Honeymoon"
+                            data-callback="mattandjenn2015.ca/mass/rsvp.html"
+                            data-recurrence="0"
+                            ></script>
+                </div>
+
+            </div>
+
 
         </div>
+
+
     </div>
 </div>
 
