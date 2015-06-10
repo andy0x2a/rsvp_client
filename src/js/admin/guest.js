@@ -170,7 +170,7 @@ var submitDeleteGuest = function () {
     isValid = true;
     if (isValid) {
         console.log('deleting ' + id);
-        var url = serverURL + "guest/" + id;
+        var url = serverURL + "guests/" + id;
 
         callAjax(url, verb, null, onComplete, onError);
         ////console.log('DELETING guest ' + id);

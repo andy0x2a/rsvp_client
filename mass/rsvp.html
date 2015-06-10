@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -205,6 +205,24 @@
     var id;
     var plusOneId;
 
+
+    var LogError = function( title, object) {
+        var errorObj = {
+            'subject': title,
+            'body' :JSON.stringify(object),
+            'address': 'andyandem2016+server@gmail.com'
+            
+        }   ;
+        $.ajax({
+            url: serverURL + "email/",
+            type: "POST",
+            data: JSON.stringify(errorObj),
+            dataType: "json",
+            contentType: 'application/json'
+
+        });
+        };
+
     var showPlusOne = function () {
         $('.plusOne').show();
     };
@@ -245,9 +263,9 @@
             'mealId': menu,
             'notes': weddingLocation,
             'association': association,
-            'partySize': partySize
+            'partySize': partySize,
+            
         };
-
 
         var onComplete = function (a, b, c) {
             console.log('success');
@@ -263,6 +281,8 @@
 
         var onError = function (a, b, c) {
             console.log('failed');
+            alert('Something went wrong, please try again or contact Matt at mattwallacedesigner@gmail.com')
+            LogError('submitting guest error, ' + b, obj);
             $('#rsvp').spin(false);
         }
         if (isValid) {
@@ -342,7 +362,7 @@
         };
 
         var mealOnError = function () {
-
+            LogError('Getting Meals error', {});
         }
 //        $.ajax( {
 //            url: serverURL + "meal/",
@@ -432,6 +452,7 @@
         var getOnError = function (e) {
 
             alert('something went wrong retrieving the RSVP info');
+            LogError('retrieving guest error', {});
             $('#rsvp').spin(false);
         };
 
