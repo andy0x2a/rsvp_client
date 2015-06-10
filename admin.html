@@ -57,7 +57,7 @@
                     </div>
                 </form>
             </div>
-            <div class="adminDashboard">
+            <div class="adminDashboard hidden">
                 <div class="col-sm-9 myInput">
                     <a href="#" class="button btn btn-default" id="getAllRSVPs">
                         <span>View/Edit RSVPs</span>
@@ -71,7 +71,7 @@
 
             </div>
 
-            <div class="col-sm-10 adminMeal">
+            <div class="col-sm-10 adminMeal hidden">
 
                 <div>
                     <table id="tblMeal" class="table table-hover">
@@ -141,7 +141,7 @@
             </div>
 
 
-            <div class="col-sm-10 adminConsole">
+            <div class="col-sm-10 adminConsole hidden">
 
                 <div>
                     <table id="tbl" class="table table-hover">
@@ -154,10 +154,10 @@
                             <th>phone Number</th>
                             <th>Email</th>
                             <th>Status</th>
-                            <th>Meal</th>
-                            <th>Address</th>
-                            <th>association</th>
-                            <th>Notes</th>
+                            <!--<th>Meal</th>-->
+                            <!--<th>Address</th>-->
+                            <!--<th>association</th>-->
+                            <th>Location</th>
                             <th>Party Size</th>
                             <th>Edit</th>
                         </tr>
@@ -207,17 +207,17 @@
                             </div>
 
 
-                            <div class="col-sm-9 myInput">
+                            <!--<div class="col-sm-9 myInput">
                                 <label for="address">Address:</label>
                     <textarea id="address" class="form-control" rows="3" name="address" autocorrect="off"
                               autocapitalize="off"
                               placeholder="Address"> </textarea>
-                            </div>
+                            </div>-->
                             <div class="col-sm-9 myInput">
-                                <label for="notes">Notes:</label>
+                                <label for="notes">Location:</label>
                                 <input id="notes" class="Input" type="text" name="contact" autocorrect="off"
                                        autocapitalize="off"
-                                       placeholder="Notes" />
+                                       placeholder="Location" />
                             </div>
 
 
@@ -227,7 +227,7 @@
                                        autocapitalize="off"
                                        placeholder="Email"/>
                             </div>
-                            <div class="col-sm-9 myInput">
+                            <!--<div class="col-sm-9 myInput">
                                 <label for="association">Guest of:</label>
 
                                 <div class="btn-group" id="associations" role="group" aria-label="...">
@@ -239,7 +239,7 @@
                                     </select>
                                 </div>
 
-                            </div>
+                            </div>-->
 
 
                             <div class="col-sm-9 myInput">
@@ -253,9 +253,9 @@
 
 
                                     </div>
-                                    <label for="menuSel">Menu:</label>
+                                    <!--<label for="menuSel">Menu:</label>
                                     <select class="form-control" id="menuSel">
-                                    </select>
+                                    </select>-->
                                 </div>
                             </div>
 
@@ -357,7 +357,8 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
 
         $("#getAllMeals").on('click', function () {
             hideAll();
-            $(".adminMeal").show();
+            //.show();
+            show($(".adminMeal"))
           $(".adminMeal").spin();
             getListOfMeals(getListOfMealsOnSuccess);
         })
@@ -377,7 +378,8 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
         $('#addMeal').on('click', function () {
             $('#meal_id').val('');
             $('#meal_name').val('');
-            $('.editMealRow').show();
+            //$('.editMealRow').show();
+            show($('.editMealRow'));
 
             $('.edMeal').text('Add Meal');
         });
@@ -393,7 +395,8 @@ var serverURL = "http://mattandjenn2015.ca/wedding/";
             adminPass = $("#adminPass").val().trim();
 
             adminCallAjax(serverURL + "admin/login/", "GET", null, function () {
-                $(".adminDashboard").show();
+                //$(".adminDashboard")
+                show($(".adminDashboard"));
                 $(".loginDiv").hide();
             }, function () {
                 alert('Invalid Password');

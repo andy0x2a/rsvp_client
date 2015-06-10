@@ -11,3 +11,9 @@ var hideAll = function () {
     $('.adminMeal').hide();
 
 };
+
+var show = function (e) {
+    e.removeClass('hidden');
+    e.show();
+}
+

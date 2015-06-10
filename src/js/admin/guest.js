@@ -15,6 +15,7 @@ var getListOnSuccess = function (data) {
 
     $.each(data, function (i, item) {
 
+        var itemStatus = (item.statusId == 1) ? 'Y' : 'N';
         var rowStr = '<tr>' +
 
             '<td>' + item.id + '</td>' +
@@ -22,10 +23,10 @@ var getListOnSuccess = function (data) {
             '<td>' + item.lastName + '</td>' +
             '<td>' + item.phoneNumber + '</td>' +
             '<td>' + item.email + '</td>' +
-            '<td>' + item.statusId + '</td>' +
-            '<td>' + getMealName(item.mealId) + '</td>' +
-            '<td>' + item.address + '</td>' +
-            '<td>' + item.association + '</td>' +
+            '<td>' +itemStatus + '</td>' +
+            //'<td>' + getMealName(item.mealId) + '</td>' +
+            //'<td>' + item.address + '</td>' +
+            //'<td>' + item.association + '</td>' +
             '<td>' + item.notes + '</td>' +
             '<td>' + item.partySize + '</td>' +
             '<td> <a href="#" class="editIcon" id="edit_icon_' + item.id + '" ><img src="src/img/edit.png"/> </a></td>' +
@@ -48,6 +49,9 @@ var getListOnSuccess = function (data) {
         $("#submitEdit").unbind();
         $("#submitEdit").on('click', submitEditedGuest);
 
+        $("#editDelete").unbind();
+        $("#editDelete").on('click', submitDeleteGuest);
+
     });
     $('.adminConsole').spin(false);
 };
@@ -62,10 +66,13 @@ var submitEditedGuest = function () {
     var lastName = $('#lastName').val().trim();
     var email = $('#email').val().trim();
     var contact = $('#contact').val().trim();
-    var address = $('#address').val().trim();
-    var menu = $('#menuSel option:selected').attr('id');
+    //var address = $('#address').val().trim();
+    var address = null;
+    //var menu = $('#menuSel option:selected').attr('id');
+    var menu = null;
     var partySize = $("#partySize ").val().trim();
     var notes = $("#notes").val().trim();
+    //var notes = null;
     //var association =$('#association option:selected').attr('val').toLowerCase();
     var association = null;
     var attending = true;
@@ -122,11 +129,62 @@ var submitEditedGuest = function () {
         $('.adminEditSingle').spin(false);
 
         $('.error').show();
+        show($(".error"));
     }
 
 
 };
 
+
+var submitDeleteGuest = function () {
+
+
+    $('.adminEditSingle').spin();
+
+    $('.error').hide();
+    var id = $('#id').val().trim();
+    
+
+
+
+    var verb = "DELETE";
+    var onComplete = function (a, b, c) {
+        console.log('success');
+
+        $('.adminEditSingle').spin(false);
+
+        $('.adminEditSingle').hide();
+        getList();
+
+
+    }
+
+    var onError = function (a, b, c) {
+        console.log('failed');
+        alert('Something went wrong');
+
+        $('.adminEditSingle').spin(false);
+
+    };
+
+    isValid = true;
+    if (isValid) {
+        console.log('deleting ' + id);
+        var url = serverURL + "guest/" + id;
+
+        callAjax(url, verb, null, onComplete, onError);
+        ////console.log('DELETING guest ' + id);
+        //onComplete();
+    } else {
+
+        $('.adminEditSingle').spin(false);
+
+        $('.error').show();
+        show($(".error"));
+    }
+
+
+};
 
 
 
@@ -142,8 +200,8 @@ var showDataFor = function (id) {
         }
     });
     if (foundElem) {
-        $(".adminEditSingle").show();
-
+        //.show();
+        show($(".adminEditSingle"));
 
         console.log('need to fill out variables here');
 
@@ -152,25 +210,26 @@ var showDataFor = function (id) {
         $('#lastName').val(foundElem.lastName);
         $('#email').val(foundElem.email);
         $('#contact').val(foundElem.phoneNumber);
-        $('#address').val(foundElem.address);
+        //$('#address').val(foundElem.address);
 
 
         $('#attendings').val(foundElem.statusId ==1? "Yes":"No");
 
-        populateMealDropdownFromAllMeals("#menuSel");
+        //populateMealDropdownFromAllMeals("#menuSel");
 
 
         //$('#association').val((!!foundElem.association)? foundElem.association.capitalize(): null);
 
 
-        $('#menuSel').val(foundElem.mealId);
+        //$('#menuSel').val(foundElem.mealId);
         $('#partySize').val(foundElem.partySize);
         $('#notes').val(foundElem.notes);
 
     }
 };
 var getList = function () {
-    $(".adminConsole").show();
+    //$(".adminConsole").show();
+    show($(".adminConsole"));
     $('.adminConsole').spin();
     console.log('here');
     adminCallAjax(serverURL + "admin/guests", "GET", null, getListOnSuccess, getListOnError);
