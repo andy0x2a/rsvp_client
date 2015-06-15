@@ -8,6 +8,17 @@
     background-size: cover ;
 }
 
+@media (min-width: 600px) {
+   
+    
+.salmon.salmonwidth {
+
+
+    width:600px;
+}
+}
+
+
 .salmon {
     /*background-color: #f2efe8;*/
     background-color:rgba(242,239,232,0.7);
@@ -36,6 +47,7 @@
     border-width: 2px;
 
 }
+
 .salmonsmall {
     width:600px;
     min-height: 200px;
@@ -65,4 +77,46 @@ input {
 }
 .btn-group {
     float:right;
+}
+
+
+
+@media (max-width: 600px) {
+   
+        .salmon.salmonwidth
+       {
+              width:100%;
+              min-height: 350px;
+              /*margin-top:40px;*/
+              padding:5px;
+              padding-top: 15px;
+              
+        }
+        .salmon.salmonwidth input {
+            width:60%
+        }
+        .salmonsmall {
+              width:100%;
+              /*height: 450px;*/
+              /*margin-top:40px;*/
+              padding:10px;
+              padding-top: 15px;
+              
+        }
+        .sidebar {
+            width:100px;
+        }
+        .main {
+            padding-left:  0px;
+            margin-left: 100px;
+
+        }
+        .headertxtmass {
+            /*width: 300px;*/
+
+        }
+        #main_innerwrapper {
+            width:100%
+        }
+            
 }
