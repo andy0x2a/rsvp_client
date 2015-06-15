@@ -79,22 +79,34 @@ input {
     float:right;
 }
 
+             #submit {
 
+            margin-top:20px;
+
+        }
 
 @media (max-width: 600px) {
    
         .salmon.salmonwidth
        {
               width:100%;
-              min-height: 350px;
+              min-height: 525px;
               /*margin-top:40px;*/
               padding:5px;
               padding-top: 15px;
               
         }
         .salmon.salmonwidth input {
-            width:60%
+            width:100%;
+            margin-left:15px;
+            /*float:left;*/
+            float:none;
         }
+           .salmon.salmonwidth label {
+            width:100%;
+
+        }
+           
         .salmonsmall {
               width:100%;
               /*height: 450px;*/
@@ -118,5 +130,8 @@ input {
         #main_innerwrapper {
             width:100%
         }
+        .btn-group {
+    float:none;
+}
             
 }
