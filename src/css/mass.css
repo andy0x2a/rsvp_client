@@ -127,6 +127,51 @@ input {
             /*width: 300px;*/
 
         }
+#headercontainer {
+    width: 80%;
+    padding: 0;
+    float: none;
+    position: relative;
+}
+.headertxt {
+    color: black;
+    font-family: "hansHand";
+    font-size: 45px;
+    text-align: center;
+    line-height: 45px;
+    font-style: italic;
+    border-bottom: 1px;
+    margin:auto;
+    margin-bottom:20px;
+    position: relative;
+    top:10px;
+}
+
+.headertxtmass {
+    color: black;
+    font-family: "hansHand";
+    font-size: 45px;
+    text-align: center;
+    line-height: 45px;
+    font-style: italic;
+    border-bottom: 1px;
+    margin:auto;
+    margin-bottom:20px;
+
+    position: relative;
+    top:10px;
+}
+
+.headerwide {
+    /*background-image: url("/src/img/banner_lgs.jpg");*/
+   height: 100px; 
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+    background-size: cover  ;
+
+}
+
+
         #main_innerwrapper {
             width:100%
         }
