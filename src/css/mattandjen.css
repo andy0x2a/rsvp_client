@@ -78,7 +78,16 @@
     background-size: cover ;
 }
 .fbg_invit {
-    background-image: url("/src/img/1000.png");
+    background-image: url("/src/img/750.png");
+    /*height: 1100px;*/
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+    background-size: contain;
+    margin-top:-200px;
+}
+
+.fbg_invit_van {
+     background-image: url("/src/img/750-van.png");
     /*height: 1100px;*/
     background-repeat: no-repeat;
     /*background-position: center;*/
